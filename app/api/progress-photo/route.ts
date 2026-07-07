@@ -1,32 +1,32 @@
 import { NextResponse } from "next/server";
+import { z } from "zod";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { saveUploadedFile, deleteUploadedFile } from "@/lib/upload";
+import { deleteUploadedFile } from "@/lib/upload";
 
 const VALID_SLOTS = new Set(["inicio", "semana4", "actual"]);
+
+const schema = z.object({
+  slot: z.enum(["inicio", "semana4", "actual"]),
+  url: z.string().url(),
+});
 
 export async function POST(request: Request) {
   const session = await getServerSession(authOptions);
   if (!session?.user?.id) return NextResponse.json({ error: "No autenticado" }, { status: 401 });
 
-  const form = await request.formData();
-  const slot = String(form.get("slot") || "");
-  const file = form.get("file");
-
-  if (!VALID_SLOTS.has(slot) || !(file instanceof File)) {
+  const body = await request.json().catch(() => null);
+  const parsed = schema.safeParse(body);
+  if (!parsed.success || !VALID_SLOTS.has(parsed.data.slot)) {
     return NextResponse.json({ error: "Datos inválidos" }, { status: 400 });
   }
-  if (!file.type.startsWith("image/")) {
-    return NextResponse.json({ error: "El archivo debe ser una imagen" }, { status: 400 });
-  }
+  const { slot, url } = parsed.data;
 
   const existing = await prisma.progressPhoto.findUnique({
     where: { userId_slot: { userId: session.user.id, slot } },
   });
   if (existing) await deleteUploadedFile(existing.url);
-
-  const url = await saveUploadedFile(file, "progress");
 
   await prisma.progressPhoto.upsert({
     where: { userId_slot: { userId: session.user.id, slot } },

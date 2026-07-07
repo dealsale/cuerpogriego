@@ -1,12 +1,16 @@
 import { NextResponse } from "next/server";
+import { z } from "zod";
 import { requireAdmin } from "@/lib/adminGuard";
 import { prisma } from "@/lib/prisma";
-import { saveUploadedFile, deleteUploadedFile } from "@/lib/upload";
+import { deleteUploadedFile } from "@/lib/upload";
 import { PATTERN_INFO } from "@/lib/exercisePatterns";
 
-const ACCEPTED_VIDEO = new Set(["video/mp4", "video/webm", "video/quicktime"]);
-const ACCEPTED_GIF = new Set(["image/gif"]);
-const MAX_SIZE = 20 * 1024 * 1024;
+const schema = z.object({
+  name: z.string().trim().min(1).optional(),
+  pattern: z.string().nullable().optional(),
+  mediaType: z.enum(["video", "gif"]).nullable().optional(),
+  mediaUrl: z.string().url().nullable().optional(),
+});
 
 export async function PATCH(request: Request, { params }: { params: Promise<{ id: string }> }) {
   const admin = await requireAdmin();
@@ -16,33 +20,32 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
   const existing = await prisma.exerciseMedia.findUnique({ where: { id } });
   if (!existing) return NextResponse.json({ error: "No encontrado" }, { status: 404 });
 
-  const form = await request.formData();
-  const name = form.get("name") ? String(form.get("name")).trim() : existing.name;
-  const pattern = form.has("pattern") ? String(form.get("pattern")) || null : existing.pattern;
-  const file = form.get("file");
+  const body = await request.json().catch(() => null);
+  const parsed = schema.safeParse(body);
+  if (!parsed.success) {
+    return NextResponse.json(
+      { error: parsed.error.issues[0]?.message || "Datos inválidos" },
+      { status: 400 }
+    );
+  }
 
-  if (pattern && !(pattern in PATTERN_INFO)) {
+  const d = parsed.data;
+  if (d.pattern && !(d.pattern in PATTERN_INFO)) {
     return NextResponse.json({ error: "Patrón inválido" }, { status: 400 });
   }
 
-  let mediaType = existing.mediaType;
-  let mediaUrl = existing.mediaUrl;
-
-  if (file instanceof File && file.size > 0) {
-    if (file.size > MAX_SIZE) {
-      return NextResponse.json({ error: "El archivo supera los 20 MB" }, { status: 400 });
-    }
-    if (ACCEPTED_VIDEO.has(file.type)) mediaType = "video";
-    else if (ACCEPTED_GIF.has(file.type)) mediaType = "gif";
-    else return NextResponse.json({ error: "Formato no soportado (usa mp4, webm o gif)" }, { status: 400 });
-
+  if (d.mediaUrl) {
     await deleteUploadedFile(existing.mediaUrl);
-    mediaUrl = await saveUploadedFile(file, "exercises");
   }
 
   const exercise = await prisma.exerciseMedia.update({
     where: { id },
-    data: { name, pattern, mediaType, mediaUrl },
+    data: {
+      name: d.name ?? existing.name,
+      pattern: d.pattern !== undefined ? d.pattern : existing.pattern,
+      mediaType: d.mediaUrl ? d.mediaType : existing.mediaType,
+      mediaUrl: d.mediaUrl ? d.mediaUrl : existing.mediaUrl,
+    },
   });
 
   return NextResponse.json({ ok: true, exercise });

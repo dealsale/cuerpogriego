@@ -1,23 +1,21 @@
-import { randomUUID } from "crypto";
-import { mkdir, writeFile, unlink } from "fs/promises";
-import path from "path";
+import { v2 as cloudinary } from "cloudinary";
 
-const UPLOADS_ROOT = path.join(process.cwd(), "public", "uploads");
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
-export async function saveUploadedFile(file: File, subdir: string): Promise<string> {
-  const ext = (file.name.split(".").pop() || "bin").toLowerCase();
-  const filename = `${randomUUID()}.${ext}`;
-  const dir = path.join(UPLOADS_ROOT, subdir);
-  await mkdir(dir, { recursive: true });
-
-  const buffer = Buffer.from(await file.arrayBuffer());
-  await writeFile(path.join(dir, filename), buffer);
-
-  return `/uploads/${subdir}/${filename}`;
-}
+const URL_PATTERN = /\/(image|video|raw)\/upload\/(?:v\d+\/)?(.+?)(?:\.[a-zA-Z0-9]+)?$/;
 
 export async function deleteUploadedFile(publicUrl: string | null | undefined): Promise<void> {
-  if (!publicUrl || !publicUrl.startsWith("/uploads/")) return;
-  const filePath = path.join(process.cwd(), "public", publicUrl);
-  await unlink(filePath).catch(() => {});
+  if (!publicUrl || !publicUrl.includes("res.cloudinary.com")) return;
+
+  const match = publicUrl.match(URL_PATTERN);
+  if (!match) return;
+
+  const [, resourceType, publicId] = match;
+  await cloudinary.uploader
+    .destroy(publicId, { resource_type: resourceType as "image" | "video" | "raw" })
+    .catch(() => {});
 }

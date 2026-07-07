@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { PATTERN_INFO, type Pattern } from "@/lib/exercisePatterns";
+import { uploadToCloudinary } from "@/lib/clientUpload";
 
 export interface ExerciseMediaItem {
   id: string;
@@ -13,6 +14,7 @@ export interface ExerciseMediaItem {
 }
 
 const PATTERN_OPTIONS = Object.entries(PATTERN_INFO) as [Pattern, { label: string }][];
+const SIGN_ENDPOINT = "/api/admin/exercises/sign";
 
 function MediaPreview({ item }: { item: ExerciseMediaItem }) {
   if (!item.mediaUrl) {
@@ -50,10 +52,11 @@ function ExerciseRow({ item }: { item: ExerciseMediaItem }) {
     setBusy(true);
     setError("");
     try {
-      const fd = new FormData();
-      fd.set("name", name);
-      fd.set("pattern", pattern);
-      const res = await fetch(`/api/admin/exercises/${item.id}`, { method: "PATCH", body: fd });
+      const res = await fetch(`/api/admin/exercises/${item.id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, pattern: pattern || null }),
+      });
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
         setError(data.error || "No se pudo guardar");
@@ -69,15 +72,20 @@ function ExerciseRow({ item }: { item: ExerciseMediaItem }) {
     setBusy(true);
     setError("");
     try {
-      const fd = new FormData();
-      fd.set("file", file);
-      const res = await fetch(`/api/admin/exercises/${item.id}`, { method: "PATCH", body: fd });
+      const { url, mediaType } = await uploadToCloudinary(file, SIGN_ENDPOINT);
+      const res = await fetch(`/api/admin/exercises/${item.id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ mediaUrl: url, mediaType }),
+      });
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
         setError(data.error || "No se pudo subir el archivo");
         return;
       }
       router.refresh();
+    } catch (err) {
+      setError((err as Error).message || "No se pudo subir el archivo");
     } finally {
       setBusy(false);
     }
@@ -140,7 +148,7 @@ function ExerciseRow({ item }: { item: ExerciseMediaItem }) {
           disabled={busy}
           className="bg-transparent border border-gold/30 text-muted-2 px-3 py-1.5 text-xs cursor-pointer hover:border-gold hover:text-gold whitespace-nowrap"
         >
-          {item.mediaUrl ? "Cambiar" : "Subir"} video/gif
+          {busy ? "Subiendo…" : `${item.mediaUrl ? "Cambiar" : "Subir"} video/gif`}
         </button>
       </div>
       <button
@@ -174,11 +182,19 @@ function AddExerciseForm() {
     setLoading(true);
     setError("");
     try {
-      const fd = new FormData();
-      fd.set("name", name);
-      fd.set("pattern", pattern);
-      if (file) fd.set("file", file);
-      const res = await fetch("/api/admin/exercises", { method: "POST", body: fd });
+      let mediaUrl: string | null = null;
+      let mediaType: string | null = null;
+      if (file) {
+        const uploaded = await uploadToCloudinary(file, SIGN_ENDPOINT);
+        mediaUrl = uploaded.url;
+        mediaType = uploaded.mediaType;
+      }
+
+      const res = await fetch("/api/admin/exercises", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, pattern: pattern || null, mediaUrl, mediaType }),
+      });
       const data = await res.json();
       if (!res.ok) {
         setError(data.error || "No se pudo guardar");
@@ -189,6 +205,8 @@ function AddExerciseForm() {
       setFile(null);
       if (fileRef.current) fileRef.current.value = "";
       router.refresh();
+    } catch (err) {
+      setError((err as Error).message || "No se pudo guardar");
     } finally {
       setLoading(false);
     }
