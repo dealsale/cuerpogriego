@@ -6,6 +6,8 @@ import { prisma } from "@/lib/prisma";
 import { toJson } from "@/lib/json";
 import { generatePlanForUser } from "@/lib/planGeneration";
 
+export const maxDuration = 60;
+
 const onboardingSchema = z.object({
   nombre: z.string().trim().min(1),
   edad: z.coerce.number().int().positive(),
