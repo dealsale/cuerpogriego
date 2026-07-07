@@ -22,9 +22,10 @@ interface RawDieta {
 
 async function generateRutina(perfil: PerfilInput) {
   try {
-    const txt = await callDeepSeek(buildRoutinePrompt(perfil));
+    const txt = await callDeepSeek(buildRoutinePrompt(perfil), 8192);
     return normalizeRutina(parseAIJson<RawRutina>(txt));
-  } catch {
+  } catch (err) {
+    console.error("generateRutina falló, usando fallback:", err);
     const fallback = {
       ...FALLBACK_RUTINA,
       advertencias: perfil.hasInjury
@@ -39,7 +40,8 @@ async function generateDieta(perfil: PerfilInput): Promise<RawDieta> {
   try {
     const txt = await callDeepSeek(buildDietPrompt(perfil));
     return parseAIJson<RawDieta>(txt);
-  } catch {
+  } catch (err) {
+    console.error("generateDieta falló, usando fallback:", err);
     return FALLBACK_DIETA;
   }
 }

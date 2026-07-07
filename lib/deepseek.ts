@@ -1,6 +1,6 @@
 const DEEPSEEK_URL = "https://api.deepseek.com/chat/completions";
 
-export async function callDeepSeek(prompt: string): Promise<string> {
+export async function callDeepSeek(prompt: string, maxTokens = 4096): Promise<string> {
   const apiKey = process.env.DEEPSEEK_API_KEY;
   if (!apiKey) throw new Error("DEEPSEEK_API_KEY no está configurada.");
 
@@ -13,7 +13,7 @@ export async function callDeepSeek(prompt: string): Promise<string> {
     body: JSON.stringify({
       model: "deepseek-chat",
       messages: [{ role: "user", content: prompt }],
-      max_tokens: 3000,
+      max_tokens: maxTokens,
     }),
   });
 
