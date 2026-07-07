@@ -4,7 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { saveUploadedFile, deleteUploadedFile } from "@/lib/upload";
 import { PATTERN_INFO } from "@/lib/exercisePatterns";
 
-const ACCEPTED_VIDEO = new Set(["video/mp4", "video/webm"]);
+const ACCEPTED_VIDEO = new Set(["video/mp4", "video/webm", "video/quicktime"]);
 const ACCEPTED_GIF = new Set(["image/gif"]);
 const MAX_SIZE = 20 * 1024 * 1024;
 

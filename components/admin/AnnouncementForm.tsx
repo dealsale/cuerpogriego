@@ -1,8 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export function AnnouncementForm() {
+  const router = useRouter();
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState("");
 
@@ -15,7 +17,10 @@ export function AnnouncementForm() {
       body: JSON.stringify({ message }),
     });
     setStatus(res.ok ? "Publicado ✓" : "Error");
-    if (res.ok) setMessage("");
+    if (res.ok) {
+      setMessage("");
+      router.refresh();
+    }
   }
 
   return (

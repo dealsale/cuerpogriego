@@ -5,20 +5,28 @@ import { useRouter } from "next/navigation";
 import { Field, TextInput } from "@/components/ui/Field";
 import { ChoiceButton } from "@/components/ui/ChoiceButton";
 import { GoldButton } from "@/components/ui/GoldButton";
-import { OBJETIVOS, LESIONES } from "@/lib/options";
+import { OBJETIVOS, LESIONES, DIAS_OPTIONS } from "@/lib/options";
 
 interface Props {
   initialPeso: string;
   initialAltura: string;
   initialObjetivo: string;
+  initialDias: string;
   initialLesiones: string[];
 }
 
-export function ProfileForm({ initialPeso, initialAltura, initialObjetivo, initialLesiones }: Props) {
+export function ProfileForm({
+  initialPeso,
+  initialAltura,
+  initialObjetivo,
+  initialDias,
+  initialLesiones,
+}: Props) {
   const router = useRouter();
   const [peso, setPeso] = useState(initialPeso);
   const [altura, setAltura] = useState(initialAltura);
   const [objetivo, setObjetivo] = useState(initialObjetivo);
+  const [dias, setDias] = useState(initialDias);
   const [lesiones, setLesiones] = useState<string[]>(initialLesiones);
   const [loading, setLoading] = useState(false);
 
@@ -32,7 +40,7 @@ export function ProfileForm({ initialPeso, initialAltura, initialObjetivo, initi
       await fetch("/api/profile", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ peso, altura, objetivo, lesiones }),
+        body: JSON.stringify({ peso, altura, objetivo, dias, lesiones }),
       });
       await fetch("/api/plan/generate", { method: "POST" });
       router.refresh();
@@ -60,6 +68,16 @@ export function ProfileForm({ initialPeso, initialAltura, initialObjetivo, initi
           {OBJETIVOS.map((o) => (
             <ChoiceButton key={o} pill active={objetivo === o} onClick={() => setObjetivo(o)}>
               {o}
+            </ChoiceButton>
+          ))}
+        </div>
+        <label className="block text-[11px] tracking-[0.1em] uppercase text-muted-3 mb-2.5">
+          Días de entrenamiento por semana
+        </label>
+        <div className="flex gap-2 mb-4.5 max-w-xs">
+          {DIAS_OPTIONS.map((d) => (
+            <ChoiceButton key={d} active={dias === d} onClick={() => setDias(d)} className="flex-1">
+              {d}
             </ChoiceButton>
           ))}
         </div>

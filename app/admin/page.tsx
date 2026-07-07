@@ -1,22 +1,8 @@
 import { prisma } from "@/lib/prisma";
 import { SuspendButton } from "@/components/admin/SuspendButton";
-import { AnnouncementForm } from "@/components/admin/AnnouncementForm";
 
 export default async function AdminUsersPage() {
-  const [users, totalUsers, activeUsers, suspendedUsers, routineCount] = await Promise.all([
-    prisma.user.findMany({ orderBy: { createdAt: "desc" } }),
-    prisma.user.count(),
-    prisma.user.count({ where: { isSuspended: false } }),
-    prisma.user.count({ where: { isSuspended: true } }),
-    prisma.routine.count(),
-  ]);
-
-  const stats = [
-    { label: "Usuarios totales", value: totalUsers },
-    { label: "Activos", value: activeUsers },
-    { label: "Suspendidos", value: suspendedUsers },
-    { label: "Planes generados", value: routineCount },
-  ];
+  const users = await prisma.user.findMany({ orderBy: { createdAt: "desc" } });
 
   return (
     <div>
@@ -27,15 +13,6 @@ export default async function AdminUsersPage() {
           </span>
           <h1 className="font-display font-bold text-[34px] mt-2 mb-0">Usuarios registrados</h1>
         </div>
-      </div>
-
-      <div className="grid gap-3.5 mb-7" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))" }}>
-        {stats.map((s) => (
-          <div key={s.label} className="bg-card border border-gold/16 p-5.5">
-            <div className="text-[11px] tracking-[0.12em] uppercase text-muted-3">{s.label}</div>
-            <div className="font-display text-[32px] text-gold-light mt-2">{s.value}</div>
-          </div>
-        ))}
       </div>
 
       <div className="bg-card border border-gold/16">
@@ -88,30 +65,6 @@ export default async function AdminUsersPage() {
             </div>
           );
         })}
-      </div>
-
-      <div className="grid gap-3.5 mt-5" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))" }}>
-        <div className="bg-card border border-gold/16 p-5.5">
-          <div className="font-display text-[15px] text-gold-light mb-3.5">Anuncio global</div>
-          <AnnouncementForm />
-        </div>
-        <div className="bg-card border border-gold/16 p-5.5">
-          <div className="font-display text-[15px] text-gold-light mb-3.5">Parámetros generales</div>
-          <div className="flex items-center justify-between py-2.5 border-b border-white/5 text-sm text-muted-1">
-            <span>Registro de nuevos usuarios</span>
-            <span className="text-[#6B8A5F]">Activo</span>
-          </div>
-          <div className="flex items-center justify-between py-2.5 border-b border-white/5 text-sm text-muted-1">
-            <span>Motor de IA</span>
-            <span className="text-gold-light">
-              {process.env.DEEPSEEK_API_KEY ? "DeepSeek" : "DeepSeek (sin API key — usando datos de respaldo)"}
-            </span>
-          </div>
-          <div className="flex items-center justify-between py-2.5 text-sm text-muted-1">
-            <span>Plan Premium</span>
-            <span className="text-muted-3">Próximamente</span>
-          </div>
-        </div>
       </div>
     </div>
   );

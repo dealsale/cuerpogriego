@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Field, TextInput, TextArea } from "@/components/ui/Field";
 import { ChoiceButton } from "@/components/ui/ChoiceButton";
 import { GoldButton } from "@/components/ui/GoldButton";
-import { OBJETIVOS, LESIONES } from "@/lib/options";
+import { OBJETIVOS, LESIONES, DIAS_OPTIONS } from "@/lib/options";
 
 interface FormState {
   nombre: string;
@@ -15,6 +15,7 @@ interface FormState {
   peso: string;
   altura: string;
   objetivo: string;
+  dias: string;
   tieneLesion: boolean | null;
   lesiones: string[];
   lesionDesc: string;
@@ -32,6 +33,7 @@ export default function OnboardingPage() {
     peso: "",
     altura: "",
     objetivo: "",
+    dias: "4",
     tieneLesion: null,
     lesiones: [],
     lesionDesc: "",
@@ -171,7 +173,7 @@ export default function OnboardingPage() {
             <h1 className="font-display font-bold text-[clamp(28px,4vw,40px)] mt-3 mb-[30px]">
               ¿Cuál es tu objetivo?
             </h1>
-            <div className="flex flex-col gap-3 mb-[34px]">
+            <div className="flex flex-col gap-3 mb-[30px]">
               {OBJETIVOS.map((o) => (
                 <ChoiceButton
                   key={o}
@@ -184,6 +186,23 @@ export default function OnboardingPage() {
                 </ChoiceButton>
               ))}
             </div>
+
+            <label className="block text-xs tracking-[0.1em] uppercase text-muted-3 mb-3">
+              ¿Cuántos días por semana podés entrenar?
+            </label>
+            <div className="flex gap-2 mb-[34px]">
+              {DIAS_OPTIONS.map((d) => (
+                <ChoiceButton
+                  key={d}
+                  active={f.dias === d}
+                  onClick={() => setF((s) => ({ ...s, dias: d }))}
+                  className="flex-1 !text-base"
+                >
+                  {d}
+                </ChoiceButton>
+              ))}
+            </div>
+
             <div className="flex gap-3">
               <GoldButton variant="ghost" onClick={() => setStep(0)}>
                 Atrás

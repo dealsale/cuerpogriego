@@ -9,6 +9,7 @@ const schema = z.object({
   peso: z.coerce.number().positive(),
   altura: z.coerce.number().positive(),
   objetivo: z.string().min(1),
+  dias: z.coerce.number().int().min(2).max(6),
   lesiones: z.array(z.string()).default([]),
 });
 
@@ -29,6 +30,7 @@ export async function PATCH(request: Request) {
       weight: d.peso,
       height: d.altura,
       goal: d.objetivo,
+      daysPerWeek: d.dias,
       hasInjury: d.lesiones.length > 0,
       injuriesJson: toJson(d.lesiones),
     },

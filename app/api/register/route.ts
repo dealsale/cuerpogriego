@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
+import { getAppSettings } from "@/lib/appSettings";
 
 const registerSchema = z.object({
   nombre: z.string().trim().min(1, "El nombre es obligatorio"),
@@ -10,6 +11,14 @@ const registerSchema = z.object({
 });
 
 export async function POST(request: Request) {
+  const settings = await getAppSettings();
+  if (!settings.registrationOpen) {
+    return NextResponse.json(
+      { error: "El registro de nuevos usuarios está cerrado por el momento." },
+      { status: 403 }
+    );
+  }
+
   const body = await request.json().catch(() => null);
   const parsed = registerSchema.safeParse(body);
   if (!parsed.success) {

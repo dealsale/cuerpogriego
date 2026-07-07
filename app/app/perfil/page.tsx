@@ -30,6 +30,7 @@ export default async function PerfilPage() {
         initialPeso={user.weight?.toString() || ""}
         initialAltura={user.height?.toString() || ""}
         initialObjetivo={user.goal || ""}
+        initialDias={String(user.daysPerWeek)}
         initialLesiones={lesiones}
       />
 

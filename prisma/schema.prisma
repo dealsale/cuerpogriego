@@ -158,3 +158,8 @@ model Announcement {
   active    Boolean  @default(true)
   createdAt DateTime @default(now())
 }
+
+model AppSettings {
+  id               String  @id @default("singleton")
+  registrationOpen Boolean @default(true)
+}

@@ -44,14 +44,21 @@ function ExerciseRow({ item }: { item: ExerciseMediaItem }) {
   const [name, setName] = useState(item.name);
   const [pattern, setPattern] = useState(item.pattern || "");
   const [busy, setBusy] = useState(false);
+  const [error, setError] = useState("");
 
   async function saveMetadata() {
     setBusy(true);
+    setError("");
     try {
       const fd = new FormData();
       fd.set("name", name);
       fd.set("pattern", pattern);
-      await fetch(`/api/admin/exercises/${item.id}`, { method: "PATCH", body: fd });
+      const res = await fetch(`/api/admin/exercises/${item.id}`, { method: "PATCH", body: fd });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        setError(data.error || "No se pudo guardar");
+        return;
+      }
       router.refresh();
     } finally {
       setBusy(false);
@@ -60,10 +67,16 @@ function ExerciseRow({ item }: { item: ExerciseMediaItem }) {
 
   async function replaceMedia(file: File) {
     setBusy(true);
+    setError("");
     try {
       const fd = new FormData();
       fd.set("file", file);
-      await fetch(`/api/admin/exercises/${item.id}`, { method: "PATCH", body: fd });
+      const res = await fetch(`/api/admin/exercises/${item.id}`, { method: "PATCH", body: fd });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        setError(data.error || "No se pudo subir el archivo");
+        return;
+      }
       router.refresh();
     } finally {
       setBusy(false);
@@ -73,8 +86,14 @@ function ExerciseRow({ item }: { item: ExerciseMediaItem }) {
   async function remove() {
     if (!confirm(`¿Eliminar "${item.name}" del catálogo?`)) return;
     setBusy(true);
+    setError("");
     try {
-      await fetch(`/api/admin/exercises/${item.id}`, { method: "DELETE" });
+      const res = await fetch(`/api/admin/exercises/${item.id}`, { method: "DELETE" });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        setError(data.error || "No se pudo eliminar");
+        return;
+      }
       router.refresh();
     } finally {
       setBusy(false);
@@ -109,7 +128,7 @@ function ExerciseRow({ item }: { item: ExerciseMediaItem }) {
         <input
           ref={fileRef}
           type="file"
-          accept="video/mp4,video/webm,image/gif"
+          accept="video/mp4,video/webm,video/quicktime,image/gif"
           className="hidden"
           onChange={(e) => {
             const f = e.target.files?.[0];
@@ -131,6 +150,9 @@ function ExerciseRow({ item }: { item: ExerciseMediaItem }) {
       >
         Eliminar
       </button>
+      {error && (
+        <div className="col-span-full text-xs text-danger -mt-1">{error}</div>
+      )}
     </div>
   );
 }
@@ -199,7 +221,7 @@ function AddExerciseForm() {
         <input
           ref={fileRef}
           type="file"
-          accept="video/mp4,video/webm,image/gif"
+          accept="video/mp4,video/webm,video/quicktime,image/gif"
           onChange={(e) => setFile(e.target.files?.[0] || null)}
           className="text-sm text-muted-2"
         />

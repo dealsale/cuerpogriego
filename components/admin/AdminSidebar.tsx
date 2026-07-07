@@ -6,9 +6,10 @@ import { usePathname } from "next/navigation";
 const NAV_ITEMS = [
   { href: "/admin", label: "Usuarios" },
   { href: "/admin/ejercicios", label: "Ejercicios" },
+  { href: "/admin/estadisticas", label: "Estadísticas" },
+  { href: "/admin/anuncios", label: "Anuncios" },
+  { href: "/admin/configuracion", label: "Configuración" },
 ];
-
-const STATIC_ITEMS = ["Estadísticas", "Anuncios", "Configuración"];
 
 export function AdminSidebar() {
   const pathname = usePathname();
@@ -38,11 +39,6 @@ export function AdminSidebar() {
             </Link>
           );
         })}
-        {STATIC_ITEMS.map((label) => (
-          <div key={label} className="px-3.5 py-2.5 text-muted-3 text-sm">
-            {label}
-          </div>
-        ))}
       </div>
       <Link
         href="/app/perfil"

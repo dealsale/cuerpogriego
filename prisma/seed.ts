@@ -47,8 +47,6 @@ async function main() {
         name,
         normalizedName,
         pattern: inferPatron(name),
-        mediaType: "",
-        mediaUrl: "",
       },
     });
   }
