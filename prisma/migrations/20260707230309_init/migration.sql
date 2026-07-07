@@ -1,6 +1,6 @@
 -- CreateTable
 CREATE TABLE "User" (
-    "id" TEXT NOT NULL PRIMARY KEY,
+    "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "passwordHash" TEXT NOT NULL,
@@ -9,20 +9,22 @@ CREATE TABLE "User" (
     "onboarded" BOOLEAN NOT NULL DEFAULT false,
     "age" INTEGER,
     "sex" TEXT,
-    "weight" REAL,
-    "height" REAL,
+    "weight" DOUBLE PRECISION,
+    "height" DOUBLE PRECISION,
     "goal" TEXT,
     "level" TEXT NOT NULL DEFAULT 'Principiante',
     "daysPerWeek" INTEGER NOT NULL DEFAULT 4,
     "hasInjury" BOOLEAN,
     "injuriesJson" TEXT NOT NULL DEFAULT '[]',
     "injuryDesc" TEXT,
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "Routine" (
-    "id" TEXT NOT NULL PRIMARY KEY,
+    "id" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
     "summary" TEXT NOT NULL,
     "daysPerWeek" INTEGER NOT NULL,
@@ -30,24 +32,26 @@ CREATE TABLE "Routine" (
     "intensity" TEXT NOT NULL,
     "warningsJson" TEXT NOT NULL DEFAULT '[]',
     "recommendationsJson" TEXT NOT NULL DEFAULT '[]',
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT "Routine_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("id") ON DELETE CASCADE ON UPDATE CASCADE
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "Routine_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "RoutineDay" (
-    "id" TEXT NOT NULL PRIMARY KEY,
+    "id" TEXT NOT NULL,
     "routineId" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "focus" TEXT NOT NULL,
     "duration" TEXT NOT NULL,
     "order" INTEGER NOT NULL,
-    CONSTRAINT "RoutineDay_routineId_fkey" FOREIGN KEY ("routineId") REFERENCES "Routine" ("id") ON DELETE CASCADE ON UPDATE CASCADE
+
+    CONSTRAINT "RoutineDay_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "RoutineExercise" (
-    "id" TEXT NOT NULL PRIMARY KEY,
+    "id" TEXT NOT NULL,
     "routineDayId" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "series" INTEGER NOT NULL,
@@ -63,82 +67,100 @@ CREATE TABLE "RoutineExercise" (
     "breathing" TEXT NOT NULL,
     "equipment" TEXT NOT NULL,
     "order" INTEGER NOT NULL,
-    CONSTRAINT "RoutineExercise_routineDayId_fkey" FOREIGN KEY ("routineDayId") REFERENCES "RoutineDay" ("id") ON DELETE CASCADE ON UPDATE CASCADE
+
+    CONSTRAINT "RoutineExercise_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "Diet" (
-    "id" TEXT NOT NULL PRIMARY KEY,
+    "id" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
     "summary" TEXT NOT NULL,
     "calories" TEXT NOT NULL,
     "water" TEXT NOT NULL,
     "recommendationsJson" TEXT NOT NULL DEFAULT '[]',
     "tipsJson" TEXT NOT NULL DEFAULT '[]',
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT "Diet_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("id") ON DELETE CASCADE ON UPDATE CASCADE
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "Diet_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "Meal" (
-    "id" TEXT NOT NULL PRIMARY KEY,
+    "id" TEXT NOT NULL,
     "dietId" TEXT NOT NULL,
     "moment" TEXT NOT NULL,
     "optionsJson" TEXT NOT NULL DEFAULT '[]',
     "note" TEXT,
     "order" INTEGER NOT NULL,
-    CONSTRAINT "Meal_dietId_fkey" FOREIGN KEY ("dietId") REFERENCES "Diet" ("id") ON DELETE CASCADE ON UPDATE CASCADE
+
+    CONSTRAINT "Meal_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "WeightLog" (
-    "id" TEXT NOT NULL PRIMARY KEY,
+    "id" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
-    "date" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "weight" REAL NOT NULL,
-    CONSTRAINT "WeightLog_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("id") ON DELETE CASCADE ON UPDATE CASCADE
+    "date" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "weight" DOUBLE PRECISION NOT NULL,
+
+    CONSTRAINT "WeightLog_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "BodyMeasurement" (
-    "id" TEXT NOT NULL PRIMARY KEY,
+    "id" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
     "chest" TEXT NOT NULL DEFAULT '',
     "waist" TEXT NOT NULL DEFAULT '',
     "arm" TEXT NOT NULL DEFAULT '',
     "leg" TEXT NOT NULL DEFAULT '',
-    "updatedAt" DATETIME NOT NULL,
-    CONSTRAINT "BodyMeasurement_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("id") ON DELETE CASCADE ON UPDATE CASCADE
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "BodyMeasurement_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "ProgressPhoto" (
-    "id" TEXT NOT NULL PRIMARY KEY,
+    "id" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
     "slot" TEXT NOT NULL,
     "url" TEXT NOT NULL,
-    "updatedAt" DATETIME NOT NULL,
-    CONSTRAINT "ProgressPhoto_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("id") ON DELETE CASCADE ON UPDATE CASCADE
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "ProgressPhoto_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "ExerciseMedia" (
-    "id" TEXT NOT NULL PRIMARY KEY,
+    "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "normalizedName" TEXT NOT NULL,
     "pattern" TEXT,
-    "mediaType" TEXT NOT NULL,
-    "mediaUrl" TEXT NOT NULL,
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" DATETIME NOT NULL
+    "mediaType" TEXT,
+    "mediaUrl" TEXT,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "ExerciseMedia_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "Announcement" (
-    "id" TEXT NOT NULL PRIMARY KEY,
+    "id" TEXT NOT NULL,
     "message" TEXT NOT NULL,
     "active" BOOLEAN NOT NULL DEFAULT true,
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "Announcement_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "AppSettings" (
+    "id" TEXT NOT NULL DEFAULT 'singleton',
+    "registrationOpen" BOOLEAN NOT NULL DEFAULT true,
+
+    CONSTRAINT "AppSettings_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
@@ -158,3 +180,27 @@ CREATE UNIQUE INDEX "ProgressPhoto_userId_slot_key" ON "ProgressPhoto"("userId",
 
 -- CreateIndex
 CREATE UNIQUE INDEX "ExerciseMedia_normalizedName_key" ON "ExerciseMedia"("normalizedName");
+
+-- AddForeignKey
+ALTER TABLE "Routine" ADD CONSTRAINT "Routine_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "RoutineDay" ADD CONSTRAINT "RoutineDay_routineId_fkey" FOREIGN KEY ("routineId") REFERENCES "Routine"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "RoutineExercise" ADD CONSTRAINT "RoutineExercise_routineDayId_fkey" FOREIGN KEY ("routineDayId") REFERENCES "RoutineDay"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Diet" ADD CONSTRAINT "Diet_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Meal" ADD CONSTRAINT "Meal_dietId_fkey" FOREIGN KEY ("dietId") REFERENCES "Diet"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "WeightLog" ADD CONSTRAINT "WeightLog_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "BodyMeasurement" ADD CONSTRAINT "BodyMeasurement_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "ProgressPhoto" ADD CONSTRAINT "ProgressPhoto_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
