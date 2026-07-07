@@ -1,0 +1,297 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-ink: #0b0b0d;
+  --color-card: #141416;
+  --color-gold: #c6a15b;
+  --color-gold-light: #e0c588;
+  --color-cream: #f3eee3;
+  --color-muted-1: #c9c3b8;
+  --color-muted-2: #a8a29a;
+  --color-muted-3: #8a857c;
+  --color-muted-4: #6b665e;
+  --color-danger: #d2784f;
+  --color-danger-soft: #e0956f;
+  --color-ok: #7fb069;
+
+  --font-display: var(--font-cinzel), serif;
+  --font-quote: var(--font-cormorant), serif;
+  --font-body: var(--font-jost), sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #0b0b0d;
+}
+
+a {
+  color: #c6a15b;
+  text-decoration: none;
+}
+a:hover {
+  color: #e0c588;
+}
+
+input,
+select,
+textarea,
+button {
+  font-family: inherit;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #0b0b0d;
+}
+::-webkit-scrollbar-thumb {
+  background: #2a2a2e;
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3a3a40;
+}
+::placeholder {
+  color: #6b665e;
+}
+
+@keyframes cgFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes cgFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes cgSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes cgModalIn {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes cgMusclePulse {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@keyframes cgRaise {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(80deg);
+  }
+}
+@keyframes cgOverhead {
+  0%,
+  100% {
+    transform: rotate(66deg);
+  }
+  50% {
+    transform: rotate(158deg);
+  }
+}
+@keyframes cgForePress {
+  0%,
+  100% {
+    transform: rotate(-38deg);
+  }
+  50% {
+    transform: rotate(2deg);
+  }
+}
+@keyframes cgExtendFore {
+  0%,
+  100% {
+    transform: rotate(-82deg);
+  }
+  50% {
+    transform: rotate(-6deg);
+  }
+}
+@keyframes cgCurl {
+  0%,
+  100% {
+    transform: rotate(2deg);
+  }
+  50% {
+    transform: rotate(138deg);
+  }
+}
+@keyframes cgTriExt {
+  0%,
+  100% {
+    transform: rotate(-118deg);
+  }
+  50% {
+    transform: rotate(-4deg);
+  }
+}
+@keyframes cgPulldown {
+  0%,
+  100% {
+    transform: rotate(150deg);
+  }
+  50% {
+    transform: rotate(60deg);
+  }
+}
+@keyframes cgRow {
+  0%,
+  100% {
+    transform: rotate(-88deg);
+  }
+  50% {
+    transform: rotate(-16deg);
+  }
+}
+@keyframes cgSquatBody {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(30px);
+  }
+}
+@keyframes cgThighSquat {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(20deg);
+  }
+}
+@keyframes cgShinSquat {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-32deg);
+  }
+}
+@keyframes cgHinge {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(46deg);
+  }
+}
+@keyframes cgHingeBody {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+}
+@keyframes cgLungeBody {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(24px);
+  }
+}
+@keyframes cgMarch {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-40deg);
+  }
+}
+@keyframes cgShinBend {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(36deg);
+  }
+}
+@keyframes cgCrunch {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-22deg);
+  }
+}
+@keyframes cgBob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+@keyframes cgSwing {
+  0%,
+  100% {
+    transform: rotate(-24deg);
+  }
+  50% {
+    transform: rotate(24deg);
+  }
+}
+@keyframes cgQuote {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  12% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  88% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

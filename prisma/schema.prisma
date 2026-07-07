@@ -1,0 +1,160 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String   @id @default(cuid())
+  name           String
+  email          String   @unique
+  passwordHash   String
+  isAdmin        Boolean  @default(false)
+  isSuspended    Boolean  @default(false)
+  onboarded      Boolean  @default(false)
+
+  age            Int?
+  sex            String?
+  weight         Float?
+  height         Float?
+  goal           String?
+  level          String   @default("Principiante")
+  daysPerWeek    Int      @default(4)
+  hasInjury      Boolean?
+  injuriesJson   String   @default("[]")
+  injuryDesc     String?
+
+  createdAt      DateTime @default(now())
+
+  routine          Routine?
+  diet             Diet?
+  weightLogs       WeightLog[]
+  measurement      BodyMeasurement?
+  progressPhotos   ProgressPhoto[]
+}
+
+model Routine {
+  id                   String   @id @default(cuid())
+  userId               String   @unique
+  user                 User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  summary              String
+  daysPerWeek          Int
+  durationEstimate     String
+  intensity            String
+  warningsJson         String   @default("[]")
+  recommendationsJson  String   @default("[]")
+  createdAt            DateTime @default(now())
+
+  days RoutineDay[]
+}
+
+model RoutineDay {
+  id        String   @id @default(cuid())
+  routineId String
+  routine   Routine  @relation(fields: [routineId], references: [id], onDelete: Cascade)
+  name      String
+  focus     String
+  duration  String
+  order     Int
+
+  exercises RoutineExercise[]
+}
+
+model RoutineExercise {
+  id               String     @id @default(cuid())
+  routineDayId     String
+  routineDay       RoutineDay @relation(fields: [routineDayId], references: [id], onDelete: Cascade)
+  name             String
+  series           Int
+  reps             String
+  rest             String
+  note             String?
+  pattern          String
+  musclesJson      String     @default("[]")
+  musclesSecJson   String     @default("[]")
+  techniqueJson    String     @default("[]")
+  mistakesJson     String     @default("[]")
+  tempo            String
+  breathing        String
+  equipment        String
+  order            Int
+}
+
+model Diet {
+  id                   String   @id @default(cuid())
+  userId               String   @unique
+  user                 User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  summary              String
+  calories             String
+  water                String
+  recommendationsJson  String   @default("[]")
+  tipsJson             String   @default("[]")
+  createdAt            DateTime @default(now())
+
+  meals Meal[]
+}
+
+model Meal {
+  id          String @id @default(cuid())
+  dietId      String
+  diet        Diet   @relation(fields: [dietId], references: [id], onDelete: Cascade)
+  moment      String
+  optionsJson String @default("[]")
+  note        String?
+  order       Int
+}
+
+model WeightLog {
+  id     String   @id @default(cuid())
+  userId String
+  user   User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  date   DateTime @default(now())
+  weight Float
+}
+
+model BodyMeasurement {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  chest     String   @default("")
+  waist     String   @default("")
+  arm       String   @default("")
+  leg       String   @default("")
+  updatedAt DateTime @updatedAt
+}
+
+model ProgressPhoto {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  slot      String
+  url       String
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, slot])
+}
+
+model ExerciseMedia {
+  id             String   @id @default(cuid())
+  name           String
+  normalizedName String   @unique
+  pattern        String?
+  mediaType      String?
+  mediaUrl       String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model Announcement {
+  id        String   @id @default(cuid())
+  message   String
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+}

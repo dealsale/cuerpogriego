@@ -1,0 +1,1433 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&amp;family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&amp;family=Jost:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { background: #0B0B0D; }
+  a { color: #C6A15B; text-decoration: none; }
+  a:hover { color: #E0C588; }
+  input, select, textarea, button { font-family: inherit; }
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: #0B0B0D; }
+  ::-webkit-scrollbar-thumb { background: #2A2A2E; border-radius: 8px; }
+  ::-webkit-scrollbar-thumb:hover { background: #3A3A40; }
+  ::placeholder { color: #6B665E; }
+  @keyframes cgFadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes cgFade { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes cgSpin { to { transform: rotate(360deg); } }
+  @keyframes cgModalIn { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes cgMusclePulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+  @keyframes cgRaise { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(80deg); } }
+  @keyframes cgOverhead { 0%, 100% { transform: rotate(66deg); } 50% { transform: rotate(158deg); } }
+  @keyframes cgForePress { 0%, 100% { transform: rotate(-38deg); } 50% { transform: rotate(2deg); } }
+  @keyframes cgExtendFore { 0%, 100% { transform: rotate(-82deg); } 50% { transform: rotate(-6deg); } }
+  @keyframes cgCurl { 0%, 100% { transform: rotate(2deg); } 50% { transform: rotate(138deg); } }
+  @keyframes cgTriExt { 0%, 100% { transform: rotate(-118deg); } 50% { transform: rotate(-4deg); } }
+  @keyframes cgPulldown { 0%, 100% { transform: rotate(150deg); } 50% { transform: rotate(60deg); } }
+  @keyframes cgRow { 0%, 100% { transform: rotate(-88deg); } 50% { transform: rotate(-16deg); } }
+  @keyframes cgSquatBody { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(30px); } }
+  @keyframes cgThighSquat { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(20deg); } }
+  @keyframes cgShinSquat { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(-32deg); } }
+  @keyframes cgHinge { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(46deg); } }
+  @keyframes cgHingeBody { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
+  @keyframes cgLungeBody { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(24px); } }
+  @keyframes cgMarch { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(-40deg); } }
+  @keyframes cgShinBend { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(36deg); } }
+  @keyframes cgCrunch { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(-22deg); } }
+  @keyframes cgBob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+  @keyframes cgSwing { 0%, 100% { transform: rotate(-24deg); } 50% { transform: rotate(24deg); } }
+  @keyframes cgQuote { 0% { opacity: 0; transform: translateY(8px); } 12% { opacity: 1; transform: translateY(0); } 88% { opacity: 1; } 100% { opacity: 0; } }
+  image-slot { display: block; }
+</style>
+</helmet>
+<div style="font-family: 'Jost', sans-serif; color: #F3EEE3; background: #0B0B0D; min-height: 100vh; -webkit-font-smoothing: antialiased;">
+
+<!-- ============================ LANDING ============================ -->
+<sc-if value="{{ isLanding }}" hint-placeholder-val="{{ true }}">
+<div style="min-height: 100vh;">
+
+  <!-- NAV -->
+  <div style="position: sticky; top: 0; z-index: 40; display: flex; align-items: center; justify-content: space-between; padding: 18px clamp(20px, 5vw, 64px); background: rgba(11,11,13,0.82); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(198,161,91,0.18);">
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <div style="width: 34px; height: 34px; border: 1.5px solid #C6A15B; display: flex; align-items: center; justify-content: center; color: #C6A15B; font-family: 'Cinzel', serif; font-weight: 800; font-size: 17px;">Y</div>
+      <div style="font-family: 'Cinzel', serif; font-weight: 700; letter-spacing: 0.28em; font-size: 15px; color: #F3EEE3;">CVERPO GRIEGO</div>
+    </div>
+    <div style="display: flex; align-items: center; gap: clamp(14px, 3vw, 34px);">
+      <a href="#beneficios" style="font-size: 13.5px; letter-spacing: 0.08em; color: #A8A29A;">Beneficios</a>
+      <a href="#como" style="font-size: 13.5px; letter-spacing: 0.08em; color: #A8A29A;">Cómo funciona</a>
+      <button onClick="{{ goLogin }}" style="background: none; border: none; color: #F3EEE3; font-size: 13.5px; letter-spacing: 0.08em; cursor: pointer; padding: 8px 4px;">Iniciar sesión</button>
+      <button onClick="{{ goRegister }}" style="background: #C6A15B; color: #0B0B0D; border: none; padding: 11px 22px; font-size: 13px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer;" style-hover="background: #E0C588;">Registrarse</button>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div style="position: relative; display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 40px; align-items: center; padding: clamp(48px, 8vh, 100px) clamp(20px, 5vw, 64px); max-width: 1320px; margin: 0 auto;">
+    <div style="animation: cgFadeUp 0.9s ease both;">
+      <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 26px;">
+        <div style="width: 46px; height: 1px; background: #C6A15B;"></div>
+        <span style="font-family: 'Cinzel', serif; letter-spacing: 0.34em; font-size: 12px; color: #C6A15B; text-transform: uppercase;">Entrenador &amp; nutricionista con IA</span>
+      </div>
+      <h1 style="font-family: 'Cinzel', serif; font-weight: 800; font-size: clamp(42px, 6.2vw, 82px); line-height: 0.98; margin: 0; color: #F3EEE3; letter-spacing: -0.01em;">Esculpe tu<br><span style="color: #C6A15B;">mejor versión.</span></h1>
+      <p style="font-family: 'Cormorant Garamond', serif; font-size: clamp(19px, 2.4vw, 26px); line-height: 1.5; color: #C9C3B8; margin: 26px 0 0; max-width: 520px; font-weight: 400;">Rutinas y planes de alimentación creados por inteligencia artificial, únicos según tu cuerpo, tu objetivo y tus límites. Disciplina de atleta, en tu bolsillo.</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 14px; margin-top: 38px;">
+        <button onClick="{{ goRegister }}" style="background: #C6A15B; color: #0B0B0D; border: none; padding: 16px 34px; font-size: 14px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; cursor: pointer;" style-hover="background: #E0C588;">Comenzar gratis</button>
+        <button onClick="{{ goLogin }}" style="background: transparent; color: #F3EEE3; border: 1px solid rgba(198,161,91,0.4); padding: 16px 30px; font-size: 14px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer;" style-hover="border-color: #C6A15B; color: #C6A15B;">Ya tengo cuenta</button>
+      </div>
+      <div style="display: flex; gap: 34px; margin-top: 48px;">
+        <div>
+          <div style="font-family: 'Cinzel', serif; font-size: 30px; font-weight: 700; color: #C6A15B;">100%</div>
+          <div style="font-size: 12px; letter-spacing: 0.12em; color: #8A857C; text-transform: uppercase; margin-top: 4px;">Personalizado</div>
+        </div>
+        <div style="width: 1px; background: rgba(198,161,91,0.2);"></div>
+        <div>
+          <div style="font-family: 'Cinzel', serif; font-size: 30px; font-weight: 700; color: #C6A15B;">24/7</div>
+          <div style="font-size: 12px; letter-spacing: 0.12em; color: #8A857C; text-transform: uppercase; margin-top: 4px;">Disponible</div>
+        </div>
+        <div style="width: 1px; background: rgba(198,161,91,0.2);"></div>
+        <div>
+          <div style="font-family: 'Cinzel', serif; font-size: 30px; font-weight: 700; color: #C6A15B;">0</div>
+          <div style="font-size: 12px; letter-spacing: 0.12em; color: #8A857C; text-transform: uppercase; margin-top: 4px;">Experiencia previa</div>
+        </div>
+      </div>
+    </div>
+    <div style="position: relative; animation: cgFade 1.2s ease both;">
+      <div style="position: absolute; inset: -14px; border: 1px solid rgba(198,161,91,0.3); pointer-events: none; z-index: 2;"></div>
+      <div style="position: absolute; top: 18px; left: 18px; right: 18px; height: 30px; z-index: 3; background-image: url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3E%3Cpath d='M6 24V6H24V24H12V12H18V18' fill='none' stroke='%23C6A15B' stroke-width='2.4'/%3E%3C/svg%3E&quot;); background-repeat: repeat-x; background-position: center; opacity: 0.85;"></div>
+      <image-slot id="cg-hero-statue" style="width: 100%; aspect-ratio: 4/5;" shape="rect" fit="cover" placeholder="Escultura griega — arrastra una imagen"></image-slot>
+    </div>
+  </div>
+
+  <!-- MOTIVATIONAL SLIDESHOW BANNER -->
+  <div style="position: relative; overflow: hidden; padding: clamp(40px, 7vh, 74px) 24px; background: linear-gradient(180deg, #101013 0%, #17130C 100%); border-top: 1px solid rgba(198,161,91,0.18); border-bottom: 1px solid rgba(198,161,91,0.18); text-align: center;">
+    <div style="position: absolute; top: 22px; left: 0; right: 0; height: 24px; background-image: url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3E%3Cpath d='M6 24V6H24V24H12V12H18V18' fill='none' stroke='%23C6A15B' stroke-width='2' opacity='0.5'/%3E%3C/svg%3E&quot;); background-repeat: repeat-x; background-position: center; opacity: 0.3;"></div>
+    <div style="max-width: 900px; margin: 0 auto; min-height: 96px; display: flex; flex-direction: column; justify-content: center;">
+      <div style="color: #C6A15B; font-family: 'Cinzel', serif; font-size: 28px; margin-bottom: 10px;">❝</div>
+      <p key="{{ bannerIndex }}" style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 500; font-size: clamp(24px, 3.6vw, 40px); line-height: 1.3; color: #F3EEE3; margin: 0; animation: cgFade 0.7s ease;">{{ currentQuote }}</p>
+    </div>
+    <div style="display: flex; justify-content: center; gap: 10px; margin-top: 30px;">
+      <sc-for list="{{ bannerDots }}" as="dot" hint-placeholder-count="5">
+        <button data-i="{{ dot.i }}" onClick="{{ setBanner }}" style="width: 26px; height: 3px; border: none; cursor: pointer; padding: 0; background: {{ dot.bg }}; transition: background 0.3s;"></button>
+      </sc-for>
+    </div>
+  </div>
+
+  <!-- BENEFICIOS -->
+  <div id="beneficios" style="padding: clamp(56px, 9vh, 110px) clamp(20px, 5vw, 64px); max-width: 1320px; margin: 0 auto;">
+    <div style="text-align: center; margin-bottom: 60px;">
+      <span style="font-family: 'Cinzel', serif; letter-spacing: 0.32em; font-size: 12px; color: #C6A15B; text-transform: uppercase;">Por qué Cuerpo Griego</span>
+      <h2 style="font-family: 'Cinzel', serif; font-weight: 700; font-size: clamp(30px, 4vw, 50px); margin: 18px 0 0; color: #F3EEE3;">Todo lo que un entrenador te daría</h2>
+      <div style="display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 24px;">
+        <div style="width: 40px; height: 1px; background: rgba(198,161,91,0.5);"></div>
+        <div style="width: 6px; height: 6px; background: #C6A15B; transform: rotate(45deg);"></div>
+        <div style="width: 40px; height: 1px; background: rgba(198,161,91,0.5);"></div>
+      </div>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+
+      <div style="background: #141416; border: 1px solid rgba(198,161,91,0.16); padding: 34px 30px;" style-hover="border-color: rgba(198,161,91,0.45);">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#C6A15B" stroke-width="1.4"><path d="M12 3v18M7 6l-4 6 4 6M17 6l4 6-4 6"></path><circle cx="12" cy="12" r="2.2"></circle></svg>
+        <h3 style="font-family: 'Cinzel', serif; font-weight: 600; font-size: 19px; margin: 20px 0 10px; color: #F3EEE3;">Rutinas por IA</h3>
+        <p style="font-size: 15px; line-height: 1.65; color: #A8A29A; margin: 0;">Días, ejercicios, series, repeticiones, descansos e intensidad. Nunca una rutina genérica.</p>
+      </div>
+
+      <div style="background: #141416; border: 1px solid rgba(198,161,91,0.16); padding: 34px 30px;" style-hover="border-color: rgba(198,161,91,0.45);">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#C6A15B" stroke-width="1.4"><path d="M6 3v7a3 3 0 006 0V3M9 10v11M15 3c-1.5 1-2 3-2 5s.5 4 2 5v8"></path></svg>
+        <h3 style="font-family: 'Cinzel', serif; font-weight: 600; font-size: 19px; margin: 20px 0 10px; color: #F3EEE3;">Dieta personalizada</h3>
+        <p style="font-size: 15px; line-height: 1.65; color: #A8A29A; margin: 0;">Desayuno, media mañana, almuerzo, merienda y cena, con agua y consejos nutricionales.</p>
+      </div>
+
+      <div style="background: #141416; border: 1px solid rgba(198,161,91,0.16); padding: 34px 30px;" style-hover="border-color: rgba(198,161,91,0.45);">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#C6A15B" stroke-width="1.4"><path d="M4 20V10M10 20V4M16 20v-7M4 20h16"></path></svg>
+        <h3 style="font-family: 'Cinzel', serif; font-weight: 600; font-size: 19px; margin: 20px 0 10px; color: #F3EEE3;">Progreso medible</h3>
+        <p style="font-size: 15px; line-height: 1.65; color: #A8A29A; margin: 0;">Registra peso, medidas y fotografías. Observa tu evolución semana a semana.</p>
+      </div>
+
+      <div style="background: #141416; border: 1px solid rgba(198,161,91,0.16); padding: 34px 30px;" style-hover="border-color: rgba(198,161,91,0.45);">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#C6A15B" stroke-width="1.4"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
+        <h3 style="font-family: 'Cinzel', serif; font-weight: 600; font-size: 19px; margin: 20px 0 10px; color: #F3EEE3;">Disponible 24/7</h3>
+        <p style="font-size: 15px; line-height: 1.65; color: #A8A29A; margin: 0;">Tu entrenador siempre listo. Cambia tus datos y la IA ajusta el plan al instante.</p>
+      </div>
+
+      <div style="background: #141416; border: 1px solid rgba(198,161,91,0.16); padding: 34px 30px;" style-hover="border-color: rgba(198,161,91,0.45);">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#C6A15B" stroke-width="1.4"><path d="M12 21c-4-3-8-6.5-8-11a4 4 0 018-1 4 4 0 018 1c0 4.5-4 8-8 11z"></path></svg>
+        <h3 style="font-family: 'Cinzel', serif; font-weight: 600; font-size: 19px; margin: 20px 0 10px; color: #F3EEE3;">Cuida tus lesiones</h3>
+        <p style="font-size: 15px; line-height: 1.65; color: #A8A29A; margin: 0;">Indica cualquier lesión y recibirás advertencias y adaptaciones seguras.</p>
+      </div>
+
+      <div style="background: #141416; border: 1px solid rgba(198,161,91,0.16); padding: 34px 30px;" style-hover="border-color: rgba(198,161,91,0.45);">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#C6A15B" stroke-width="1.4"><rect x="7" y="2.5" width="10" height="19" rx="2"></rect><path d="M11 18.5h2"></path></svg>
+        <h3 style="font-family: 'Cinzel', serif; font-weight: 600; font-size: 19px; margin: 20px 0 10px; color: #F3EEE3;">Instálala como app</h3>
+        <p style="font-size: 15px; line-height: 1.65; color: #A8A29A; margin: 0;">Funciona en celular, tablet y computador. Instálala desde tu navegador (PWA).</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- COMO FUNCIONA -->
+  <div id="como" style="padding: clamp(40px, 6vh, 80px) clamp(20px, 5vw, 64px) clamp(56px, 9vh, 110px); max-width: 1100px; margin: 0 auto;">
+    <div style="text-align: center; margin-bottom: 54px;">
+      <span style="font-family: 'Cinzel', serif; letter-spacing: 0.32em; font-size: 12px; color: #C6A15B; text-transform: uppercase;">En tres pasos</span>
+      <h2 style="font-family: 'Cinzel', serif; font-weight: 700; font-size: clamp(30px, 4vw, 50px); margin: 18px 0 0; color: #F3EEE3;">Cómo funciona</h2>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 34px;">
+      <div style="text-align: center;">
+        <div style="font-family: 'Cinzel', serif; font-size: 52px; font-weight: 800; color: rgba(198,161,91,0.35); line-height: 1;">I</div>
+        <h3 style="font-family: 'Cinzel', serif; font-weight: 600; font-size: 20px; margin: 16px 0 10px; color: #F3EEE3;">Cuéntanos de ti</h3>
+        <p style="font-size: 15px; line-height: 1.65; color: #A8A29A; margin: 0;">Peso, altura, objetivo y posibles lesiones. Solo lo necesario.</p>
+      </div>
+      <div style="text-align: center;">
+        <div style="font-family: 'Cinzel', serif; font-size: 52px; font-weight: 800; color: rgba(198,161,91,0.35); line-height: 1;">II</div>
+        <h3 style="font-family: 'Cinzel', serif; font-weight: 600; font-size: 20px; margin: 16px 0 10px; color: #F3EEE3;">La IA crea tu plan</h3>
+        <p style="font-size: 15px; line-height: 1.65; color: #A8A29A; margin: 0;">Rutina y dieta a tu medida, como las diseñaría un profesional.</p>
+      </div>
+      <div style="text-align: center;">
+        <div style="font-family: 'Cinzel', serif; font-size: 52px; font-weight: 800; color: rgba(198,161,91,0.35); line-height: 1;">III</div>
+        <h3 style="font-family: 'Cinzel', serif; font-weight: 600; font-size: 20px; margin: 16px 0 10px; color: #F3EEE3;">Entrena y avanza</h3>
+        <p style="font-size: 15px; line-height: 1.65; color: #A8A29A; margin: 0;">Sigue tu plan, registra tu progreso y supérate cada día.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div style="text-align: center; padding: clamp(56px, 10vh, 120px) 24px; background: linear-gradient(180deg, #0B0B0D 0%, #14100A 100%); border-top: 1px solid rgba(198,161,91,0.18);">
+    <h2 style="font-family: 'Cinzel', serif; font-weight: 800; font-size: clamp(30px, 5vw, 58px); margin: 0 auto; color: #F3EEE3; max-width: 720px; line-height: 1.05;">El mármol no se esculpe solo.</h2>
+    <p style="font-family: 'Cormorant Garamond', serif; font-size: clamp(19px, 2.4vw, 26px); color: #C9C3B8; margin: 20px auto 36px; max-width: 540px;">Empieza hoy. Tu primera rutina te espera.</p>
+    <button onClick="{{ goRegister }}" style="background: #C6A15B; color: #0B0B0D; border: none; padding: 17px 42px; font-size: 14px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; cursor: pointer;" style-hover="background: #E0C588;">Crear mi cuenta</button>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="padding: 40px clamp(20px, 5vw, 64px); border-top: 1px solid rgba(198,161,91,0.14); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px;">
+    <div style="font-family: 'Cinzel', serif; font-weight: 700; letter-spacing: 0.28em; font-size: 13px; color: #A8A29A;">CVERPO GRIEGO</div>
+    <div style="font-size: 12.5px; color: #6B665E; letter-spacing: 0.06em;">© 2026 Cuerpo Griego · Impulsado por IA (DeepSeek)</div>
+  </div>
+
+</div>
+</sc-if>
+
+<!-- ============================ AUTH ============================ -->
+<sc-if value="{{ isAuth }}" hint-placeholder-val="{{ false }}">
+<div style="min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr;">
+  <!-- visual side -->
+  <div style="position: relative; background: linear-gradient(180deg, #101013, #16120A); display: flex; flex-direction: column; justify-content: space-between; padding: clamp(28px, 4vw, 56px); border-right: 1px solid rgba(198,161,91,0.18); min-height: 320px;">
+    <div onClick="{{ goLanding }}" style="display: flex; align-items: center; gap: 12px; cursor: pointer;">
+      <div style="width: 32px; height: 32px; border: 1.5px solid #C6A15B; display: flex; align-items: center; justify-content: center; color: #C6A15B; font-family: 'Cinzel', serif; font-weight: 800; font-size: 16px;">Y</div>
+      <div style="font-family: 'Cinzel', serif; font-weight: 700; letter-spacing: 0.26em; font-size: 14px;">CVERPO GRIEGO</div>
+    </div>
+    <div>
+      <div style="color: #C6A15B; font-family: 'Cinzel', serif; font-size: 30px;">❝</div>
+      <p style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: clamp(22px, 2.6vw, 34px); line-height: 1.3; color: #F3EEE3; margin: 8px 0 0; max-width: 460px;">Conócete a ti mismo, y luego supérate.</p>
+    </div>
+    <image-slot id="cg-auth-statue" style="position: absolute; inset: 0; z-index: 0; opacity: 0.16;" shape="rect" fit="cover" placeholder=""></image-slot>
+  </div>
+  <!-- form side -->
+  <div style="display: flex; align-items: center; justify-content: center; padding: clamp(28px, 4vw, 56px); background: #0B0B0D;">
+    <div style="width: 100%; max-width: 380px; animation: cgFadeUp 0.6s ease both;">
+      <h1 style="font-family: 'Cinzel', serif; font-weight: 700; font-size: 30px; margin: 0 0 6px;">{{ authTitle }}</h1>
+      <p style="font-size: 14.5px; color: #A8A29A; margin: 0 0 28px;">{{ authSub }}</p>
+      <div style="display: flex; gap: 0; margin-bottom: 26px; border: 1px solid rgba(198,161,91,0.25);">
+        <button onClick="{{ setRegisterTab }}" style="flex: 1; padding: 12px; border: none; cursor: pointer; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; background: {{ regTabBg }}; color: {{ regTabColor }};">Registrarse</button>
+        <button onClick="{{ setLoginTab }}" style="flex: 1; padding: 12px; border: none; cursor: pointer; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; background: {{ logTabBg }}; color: {{ logTabColor }};">Iniciar sesión</button>
+      </div>
+      <label style="display: block; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #8A857C; margin-bottom: 8px;">Nombre</label>
+      <input data-key="nombre" value="{{ f.nombre }}" onInput="{{ onField }}" placeholder="Tu nombre" style="width: 100%; background: #141416; border: 1px solid rgba(198,161,91,0.22); color: #F3EEE3; padding: 13px 15px; font-size: 15px; margin-bottom: 18px; outline: none;" style-focus="border-color: #C6A15B;">
+      <label style="display: block; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #8A857C; margin-bottom: 8px;">Correo</label>
+      <input data-key="email" value="{{ f.email }}" onInput="{{ onField }}" placeholder="tu@correo.com" style="width: 100%; background: #141416; border: 1px solid rgba(198,161,91,0.22); color: #F3EEE3; padding: 13px 15px; font-size: 15px; margin-bottom: 18px; outline: none;" style-focus="border-color: #C6A15B;">
+      <label style="display: block; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #8A857C; margin-bottom: 8px;">Contraseña</label>
+      <input type="password" value="••••••••" onInput="{{ onField }}" data-key="pass" style="width: 100%; background: #141416; border: 1px solid rgba(198,161,91,0.22); color: #F3EEE3; padding: 13px 15px; font-size: 15px; margin-bottom: 26px; outline: none;" style-focus="border-color: #C6A15B;">
+      <button onClick="{{ submitAuth }}" style="width: 100%; background: #C6A15B; color: #0B0B0D; border: none; padding: 15px; font-size: 13px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; cursor: pointer;" style-hover="background: #E0C588;">{{ authCta }}</button>
+      <div style="text-align: center; margin-top: 20px;">
+        <button onClick="{{ goLanding }}" style="background: none; border: none; color: #8A857C; font-size: 13px; cursor: pointer;" style-hover="color: #C6A15B;">← Volver al inicio</button>
+      </div>
+    </div>
+  </div>
+</div>
+</sc-if>
+
+<!-- ============================ ONBOARDING ============================ -->
+<sc-if value="{{ isOnboard }}" hint-placeholder-val="{{ false }}">
+<div style="min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: clamp(24px, 4vw, 48px) 20px 60px; background: radial-gradient(circle at 50% -10%, #16120A, #0B0B0D 55%);">
+  <div onClick="{{ goLanding }}" style="display: flex; align-items: center; gap: 12px; cursor: pointer; margin-bottom: 34px;">
+    <div style="width: 32px; height: 32px; border: 1.5px solid #C6A15B; display: flex; align-items: center; justify-content: center; color: #C6A15B; font-family: 'Cinzel', serif; font-weight: 800; font-size: 16px;">Y</div>
+    <div style="font-family: 'Cinzel', serif; font-weight: 700; letter-spacing: 0.26em; font-size: 14px;">CVERPO GRIEGO</div>
+  </div>
+
+  <!-- progress -->
+  <div style="width: 100%; max-width: 560px; display: flex; align-items: center; gap: 10px; margin-bottom: 40px;">
+    <div style="flex: 1; height: 2px; background: {{ stepBar0 }};"></div>
+    <div style="flex: 1; height: 2px; background: {{ stepBar1 }};"></div>
+    <div style="flex: 1; height: 2px; background: {{ stepBar2 }};"></div>
+  </div>
+
+  <div style="width: 100%; max-width: 560px;">
+    <!-- STEP 0: datos -->
+    <sc-if value="{{ isStep0 }}" hint-placeholder-val="{{ true }}">
+    <div style="animation: cgFadeUp 0.5s ease both;">
+      <span style="font-family: 'Cinzel', serif; letter-spacing: 0.28em; font-size: 11px; color: #C6A15B; text-transform: uppercase;">Paso I · Sobre ti</span>
+      <h1 style="font-family: 'Cinzel', serif; font-weight: 700; font-size: clamp(28px, 4vw, 40px); margin: 12px 0 30px;">Cuéntanos de ti</h1>
+      <label style="display: block; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #8A857C; margin-bottom: 8px;">Nombre</label>
+      <input data-key="nombre" value="{{ f.nombre }}" onInput="{{ onField }}" placeholder="Tu nombre" style="width: 100%; background: #141416; border: 1px solid rgba(198,161,91,0.22); color: #F3EEE3; padding: 13px 15px; font-size: 15px; margin-bottom: 20px; outline: none;" style-focus="border-color: #C6A15B;">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;">
+        <div>
+          <label style="display: block; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #8A857C; margin-bottom: 8px;">Edad</label>
+          <input data-key="edad" value="{{ f.edad }}" onInput="{{ onField }}" type="number" placeholder="Años" style="width: 100%; background: #141416; border: 1px solid rgba(198,161,91,0.22); color: #F3EEE3; padding: 13px 15px; font-size: 15px; outline: none;" style-focus="border-color: #C6A15B;">
+        </div>
+        <div>
+          <label style="display: block; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #8A857C; margin-bottom: 8px;">Sexo</label>
+          <div style="display: flex; gap: 8px;">
+            <button data-group="sexo" data-value="Hombre" onClick="{{ onChoose }}" style="flex: 1; padding: 13px 6px; cursor: pointer; font-size: 13px; background: {{ sexoHombreBg }}; color: {{ sexoHombreColor }}; border: 1px solid {{ sexoHombreBorder }};">Hombre</button>
+            <button data-group="sexo" data-value="Mujer" onClick="{{ onChoose }}" style="flex: 1; padding: 13px 6px; cursor: pointer; font-size: 13px; background: {{ sexoMujerBg }}; color: {{ sexoMujerColor }}; border: 1px solid {{ sexoMujerBorder }};">Mujer</button>
+          </div>
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 34px;">
+        <div>
+          <label style="display: block; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #8A857C; margin-bottom: 8px;">Peso (kg)</label>
+          <input data-key="peso" value="{{ f.peso }}" onInput="{{ onField }}" type="number" placeholder="80" style="width: 100%; background: #141416; border: 1px solid rgba(198,161,91,0.22); color: #F3EEE3; padding: 13px 15px; font-size: 15px; outline: none;" style-focus="border-color: #C6A15B;">
+        </div>
+        <div>
+          <label style="display: block; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #8A857C; margin-bottom: 8px;">Altura (cm)</label>
+          <input data-key="altura" value="{{ f.altura }}" onInput="{{ onField }}" type="number" placeholder="178" style="width: 100%; background: #141416; border: 1px solid rgba(198,161,91,0.22); color: #F3EEE3; padding: 13px 15px; font-size: 15px; outline: none;" style-focus="border-color: #C6A15B;">
+        </div>
+      </div>
+      <button onClick="{{ nextStep }}" disabled="{{ step0Disabled }}" style="width: 100%; background: {{ next0Bg }}; color: #0B0B0D; border: none; padding: 15px; font-size: 13px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; cursor: {{ next0Cursor }};">Continuar</button>
+    </div>
+    </sc-if>
+
+    <!-- STEP 1: objetivo -->
+    <sc-if value="{{ isStep1 }}" hint-placeholder-val="{{ false }}">
+    <div style="animation: cgFadeUp 0.5s ease both;">
+      <span style="font-family: 'Cinzel', serif; letter-spacing: 0.28em; font-size: 11px; color: #C6A15B; text-transform: uppercase;">Paso II · Tu meta</span>
+      <h1 style="font-family: 'Cinzel', serif; font-weight: 700; font-size: clamp(28px, 4vw, 40px); margin: 12px 0 30px;">¿Cuál es tu objetivo?</h1>
+      <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 34px;">
+        <sc-for list="{{ objetivoOpts }}" as="o" hint-placeholder-count="5">
+          <button data-group="objetivo" data-value="{{ o.value }}" onClick="{{ onChoose }}" style="display: flex; align-items: center; justify-content: space-between; text-align: left; padding: 18px 20px; cursor: pointer; font-size: 16px; background: {{ o.bg }}; color: {{ o.color }}; border: 1px solid {{ o.border }};">
+            <span>{{ o.value }}</span>
+            <span style="font-family: 'Cinzel', serif; color: #C6A15B;">{{ o.mark }}</span>
+          </button>
+        </sc-for>
+      </div>
+      <div style="display: flex; gap: 12px;">
+        <button onClick="{{ prevStep }}" style="padding: 15px 24px; background: transparent; color: #A8A29A; border: 1px solid rgba(198,161,91,0.3); font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer;">Atrás</button>
+        <button onClick="{{ nextStep }}" disabled="{{ step1Disabled }}" style="flex: 1; background: {{ next1Bg }}; color: #0B0B0D; border: none; padding: 15px; font-size: 13px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; cursor: {{ next1Cursor }};">Continuar</button>
+      </div>
+    </div>
+    </sc-if>
+
+    <!-- STEP 2: lesiones -->
+    <sc-if value="{{ isStep2 }}" hint-placeholder-val="{{ false }}">
+    <div style="animation: cgFadeUp 0.5s ease both;">
+      <span style="font-family: 'Cinzel', serif; letter-spacing: 0.28em; font-size: 11px; color: #C6A15B; text-transform: uppercase;">Paso III · Tu seguridad</span>
+      <h1 style="font-family: 'Cinzel', serif; font-weight: 700; font-size: clamp(28px, 4vw, 40px); margin: 12px 0 12px;">¿Has sufrido alguna lesión?</h1>
+      <p style="font-size: 14.5px; color: #A8A29A; margin: 0 0 24px;">La IA adaptará tu rutina y te dará advertencias para protegerte.</p>
+      <div style="display: flex; gap: 12px; margin-bottom: 24px;">
+        <button data-value="false" onClick="{{ setLesion }}" style="flex: 1; padding: 16px; cursor: pointer; font-size: 15px; background: {{ lesNoBg }}; color: {{ lesNoColor }}; border: 1px solid {{ lesNoBorder }};">No, ninguna</button>
+        <button data-value="true" onClick="{{ setLesion }}" style="flex: 1; padding: 16px; cursor: pointer; font-size: 15px; background: {{ lesSiBg }}; color: {{ lesSiColor }}; border: 1px solid {{ lesSiBorder }};">Sí</button>
+      </div>
+      <sc-if value="{{ lesionSi }}" hint-placeholder-val="{{ false }}">
+      <div style="animation: cgFadeUp 0.4s ease both; margin-bottom: 24px;">
+        <label style="display: block; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #8A857C; margin-bottom: 12px;">Selecciona la zona</label>
+        <div style="display: flex; flex-wrap: wrap; gap: 9px; margin-bottom: 20px;">
+          <sc-for list="{{ lesionOpts }}" as="l" hint-placeholder-count="9">
+            <button data-value="{{ l.value }}" onClick="{{ toggleLesion }}" style="padding: 9px 16px; cursor: pointer; font-size: 14px; border-radius: 100px; background: {{ l.bg }}; color: {{ l.color }}; border: 1px solid {{ l.border }};">{{ l.value }}</button>
+          </sc-for>
+        </div>
+        <label style="display: block; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #8A857C; margin-bottom: 8px;">Descripción (opcional)</label>
+        <textarea data-key="lesionDesc" value="{{ f.lesionDesc }}" onInput="{{ onField }}" placeholder="Ej: molestia en la rodilla derecha al flexionar" rows="3" style="width: 100%; background: #141416; border: 1px solid rgba(198,161,91,0.22); color: #F3EEE3; padding: 13px 15px; font-size: 15px; outline: none; resize: vertical; font-family: inherit;" style-focus="border-color: #C6A15B;"></textarea>
+      </div>
+      </sc-if>
+      <div style="display: flex; gap: 12px;">
+        <button onClick="{{ prevStep }}" style="padding: 15px 24px; background: transparent; color: #A8A29A; border: 1px solid rgba(198,161,91,0.3); font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer;">Atrás</button>
+        <button onClick="{{ finishOnboarding }}" disabled="{{ step2Disabled }}" style="flex: 1; background: {{ finishBg }}; color: #0B0B0D; border: none; padding: 15px; font-size: 13px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; cursor: {{ finishCursor }};">Generar mi plan →</button>
+      </div>
+    </div>
+    </sc-if>
+  </div>
+</div>
+</sc-if>
+
+<!-- ============================ APP ============================ -->
+<sc-if value="{{ isApp }}" hint-placeholder-val="{{ false }}">
+<div style="max-width: 880px; margin: 0 auto; min-height: 100vh; padding-bottom: 96px; background: #0B0B0D; position: relative;">
+
+  <!-- app header -->
+  <div style="position: sticky; top: 0; z-index: 30; display: flex; align-items: center; justify-content: space-between; padding: 16px clamp(18px, 4vw, 34px); background: rgba(11,11,13,0.9); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(198,161,91,0.16);">
+    <div style="display: flex; align-items: center; gap: 11px;">
+      <div style="width: 30px; height: 30px; border: 1.5px solid #C6A15B; display: flex; align-items: center; justify-content: center; color: #C6A15B; font-family: 'Cinzel', serif; font-weight: 800; font-size: 15px;">Y</div>
+      <div style="font-family: 'Cinzel', serif; font-weight: 700; letter-spacing: 0.24em; font-size: 13px;">CUERPO GRIEGO</div>
+    </div>
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <div style="font-size: 13px; color: #A8A29A;">{{ primerNombre }}</div>
+      <div style="width: 34px; height: 34px; border-radius: 50%; background: linear-gradient(135deg, #C6A15B, #7A5F28); display: flex; align-items: center; justify-content: center; color: #0B0B0D; font-family: 'Cinzel', serif; font-weight: 700; font-size: 14px;">{{ inicial }}</div>
+    </div>
+  </div>
+
+  <div style="padding: clamp(20px, 4vw, 34px);">
+
+  <!-- ============ INICIO ============ -->
+  <sc-if value="{{ tabInicio }}" hint-placeholder-val="{{ true }}">
+  <div style="animation: cgFade 0.4s ease both;">
+    <div style="margin-bottom: 26px;">
+      <span style="font-family: 'Cinzel', serif; letter-spacing: 0.22em; font-size: 11px; color: #C6A15B; text-transform: uppercase;">{{ hoyFecha }}</span>
+      <h1 style="font-family: 'Cinzel', serif; font-weight: 700; font-size: clamp(28px, 5vw, 40px); margin: 8px 0 0;">Hola, {{ primerNombre }}</h1>
+      <p style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 21px; color: #C9C3B8; margin: 8px 0 0;">“{{ currentQuote }}”</p>
+    </div>
+
+    <!-- objetivo + resumen row -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin-bottom: 22px;">
+      <div style="background: #141416; border: 1px solid rgba(198,161,91,0.16); padding: 20px;">
+        <div style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #8A857C;">Objetivo</div>
+        <div style="font-family: 'Cinzel', serif; font-size: 17px; color: #E0C588; margin-top: 8px;">{{ objetivoActual }}</div>
+      </div>
+      <div style="background: #141416; border: 1px solid rgba(198,161,91,0.16); padding: 20px;">
+        <div style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #8A857C;">Peso actual</div>
+        <div style="font-family: 'Cinzel', serif; font-size: 17px; color: #F3EEE3; margin-top: 8px;">{{ pesoActual }} kg</div>
+      </div>
+      <div style="background: #141416; border: 1px solid rgba(198,161,91,0.16); padding: 20px;">
+        <div style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #8A857C;">IMC</div>
+        <div style="font-family: 'Cinzel', serif; font-size: 17px; color: #F3EEE3; margin-top: 8px;">{{ imcTxt }}</div>
+      </div>
+    </div>
+
+    <!-- proximo entrenamiento -->
+    <div style="position: relative; background: linear-gradient(120deg, #16120A, #141416); border: 1px solid rgba(198,161,91,0.28); padding: 26px; margin-bottom: 22px; overflow: hidden;">
+      <div style="position: absolute; top: -20px; right: -10px; font-family: 'Cinzel', serif; font-size: 130px; color: rgba(198,161,91,0.06); line-height: 1;">π</div>
+      <div style="position: relative;">
+        <div style="font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #C6A15B;">Próximo entrenamiento</div>
+        <sc-if value="{{ rutinaLista }}" hint-placeholder-val="{{ false }}">
+          <h2 style="font-family: 'Cinzel', serif; font-weight: 700; font-size: 26px; margin: 12px 0 6px;">{{ proximoEnfoque }}</h2>
+          <div style="display: flex; gap: 18px; color: #A8A29A; font-size: 14px; margin-bottom: 18px;">
+            <span>◷ {{ proximoDuracion }}</span>
+            <span>◆ {{ proximoNombre }}</span>
+          </div>
+          <button data-tab="rutina" onClick="{{ setTab }}" style="background: #C6A15B; color: #0B0B0D; border: none; padding: 12px 24px; font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer;" style-hover="background: #E0C588;">Ver mi rutina</button>
+        </sc-if>
+        <sc-if value="{{ loadingRutina }}" hint-placeholder-val="{{ true }}">
+          <div style="display: flex; align-items: center; gap: 14px; margin-top: 16px; color: #C9C3B8;">
+            <div style="width: 22px; height: 22px; border: 2px solid rgba(198,161,91,0.3); border-top-color: #C6A15B; border-radius: 50%; animation: cgSpin 0.8s linear infinite;"></div>
+            <span style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 19px;">La IA está creando tu rutina…</span>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+
+    <!-- alimentacion teaser -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+      <button data-tab="rutina" onClick="{{ setTab }}" style="text-align: left; background: #141416; border: 1px solid rgba(198,161,91,0.16); padding: 22px; cursor: pointer;" style-hover="border-color: rgba(198,161,91,0.45);">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C6A15B" stroke-width="1.4"><path d="M12 3v18M7 6l-4 6 4 6M17 6l4 6-4 6"></path></svg>
+        <div style="font-family: 'Cinzel', serif; font-size: 16px; margin-top: 12px; color: #F3EEE3;">Mi rutina</div>
+        <div style="font-size: 13px; color: #8A857C; margin-top: 4px;">Tu plan de entrenamiento</div>
+      </button>
+      <button data-tab="alimentacion" onClick="{{ setTab }}" style="text-align: left; background: #141416; border: 1px solid rgba(198,161,91,0.16); padding: 22px; cursor: pointer;" style-hover="border-color: rgba(198,161,91,0.45);">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C6A15B" stroke-width="1.4"><path d="M6 3v7a3 3 0 006 0V3M9 10v11M15 3c-1.5 1-2 3-2 5s.5 4 2 5v8"></path></svg>
+        <div style="font-family: 'Cinzel', serif; font-size: 16px; margin-top: 12px; color: #F3EEE3;">Mi alimentación</div>
+        <div style="font-size: 13px; color: #8A857C; margin-top: 4px;">Tu plan nutricional</div>
+      </button>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- ============ RUTINA ============ -->
+  <sc-if value="{{ tabRutina }}" hint-placeholder-val="{{ false }}">
+  <div style="animation: cgFade 0.4s ease both;">
+    <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: 22px; flex-wrap: wrap;">
+      <div>
+        <span style="font-family: 'Cinzel', serif; letter-spacing: 0.22em; font-size: 11px; color: #C6A15B; text-transform: uppercase;">Tu plan de entrenamiento</span>
+        <h1 style="font-family: 'Cinzel', serif; font-weight: 700; font-size: clamp(26px, 5vw, 38px); margin: 8px 0 0;">Mi rutina</h1>
+      </div>
+      <button onClick="{{ regenerar }}" style="background: transparent; color: #C6A15B; border: 1px solid rgba(198,161,91,0.4); padding: 11px 18px; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer;" style-hover="border-color: #C6A15B; background: rgba(198,161,91,0.08);">↻ Regenerar</button>
+    </div>
+
+    <sc-if value="{{ loadingRutina }}" hint-placeholder-val="{{ true }}">
+      <div style="text-align: center; padding: 80px 20px;">
+        <div style="width: 40px; height: 40px; border: 3px solid rgba(198,161,91,0.25); border-top-color: #C6A15B; border-radius: 50%; animation: cgSpin 0.8s linear infinite; margin: 0 auto;"></div>
+        <p style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 22px; color: #C9C3B8; margin-top: 22px;">La IA está diseñando tu rutina a medida…</p>
+        <p style="font-size: 13px; color: #6B665E; margin-top: 6px;">Analizando peso, altura, objetivo y lesiones</p>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ rutinaLista }}" hint-placeholder-val="{{ false }}">
+    <div>
+      <p style="font-family: 'Cormorant Garamond', serif; font-size: 20px; line-height: 1.5; color: #C9C3B8; margin: 0 0 20px;">{{ rutina.resumen }}</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 22px;">
+        <div style="background: #141416; border: 1px solid rgba(198,161,91,0.2); padding: 10px 16px;"><span style="color: #8A857C; font-size: 12px;">Días/semana</span> <span style="font-family: 'Cinzel', serif; color: #E0C588; margin-left: 6px;">{{ rutina.diasPorSemana }}</span></div>
+        <div style="background: #141416; border: 1px solid rgba(198,161,91,0.2); padding: 10px 16px;"><span style="color: #8A857C; font-size: 12px;">Duración</span> <span style="font-family: 'Cinzel', serif; color: #E0C588; margin-left: 6px;">{{ rutina.duracionEstimada }}</span></div>
+        <div style="background: #141416; border: 1px solid rgba(198,161,91,0.2); padding: 10px 16px;"><span style="color: #8A857C; font-size: 12px;">Intensidad</span> <span style="font-family: 'Cinzel', serif; color: #E0C588; margin-left: 6px;">{{ rutina.intensidad }}</span></div>
+      </div>
+
+      <sc-if value="{{ tieneAdvertencias }}" hint-placeholder-val="{{ false }}">
+      <div style="background: rgba(198,90,60,0.1); border: 1px solid rgba(210,120,80,0.4); border-left: 3px solid #D2784F; padding: 16px 18px; margin-bottom: 22px;">
+        <div style="display: flex; align-items: center; gap: 8px; color: #E0956F; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px;">⚠ Advertencias por tu lesión</div>
+        <sc-for list="{{ rutina.advertencias }}" as="a" hint-placeholder-count="1">
+          <div style="font-size: 14px; color: #D8CFC4; line-height: 1.55;">· {{ a }}</div>
+        </sc-for>
+      </div>
+      </sc-if>
+
+      <!-- days -->
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <sc-for list="{{ diasRutina }}" as="dia" hint-placeholder-count="4">
+        <div style="background: #141416; border: 1px solid rgba(198,161,91,0.16);">
+          <div style="display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: 1px solid rgba(198,161,91,0.12); background: linear-gradient(90deg, rgba(198,161,91,0.06), transparent);">
+            <div>
+              <div style="font-family: 'Cinzel', serif; font-weight: 600; font-size: 17px; color: #F3EEE3;">{{ dia.nombre }}</div>
+              <div style="font-size: 13px; color: #C6A15B; margin-top: 2px;">{{ dia.enfoque }}</div>
+            </div>
+            <div style="font-size: 12px; color: #8A857C;">◷ {{ dia.duracion }}</div>
+          </div>
+          <div style="padding: 8px 20px 16px;">
+            <sc-for list="{{ dia.ejercicios }}" as="ej" hint-placeholder-count="4">
+            <div onClick="{{ openEjercicio }}" data-id="{{ ej.id }}" style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 8px; margin: 0 -8px; border-bottom: 1px solid rgba(255,255,255,0.04); cursor: pointer;" style-hover="background: rgba(198,161,91,0.07);">
+              <div style="flex: 1; min-width: 0;">
+                <div style="font-size: 15px; color: #F3EEE3;">{{ ej.nombre }}</div>
+                <div style="font-size: 11px; color: #C6A15B; margin-top: 3px; letter-spacing: 0.04em;">{{ ej.patronLabel }} · ver músculos ▸</div>
+                <sc-if value="{{ ej.nota }}" hint-placeholder-val="{{ false }}"><div style="font-size: 12.5px; color: #8A857C; margin-top: 2px; font-style: italic;">{{ ej.nota }}</div></sc-if>
+              </div>
+              <div style="display: flex; align-items: center; gap: 16px; text-align: right; flex-shrink: 0;">
+                <div><div style="font-family: 'Cinzel', serif; font-size: 16px; color: #E0C588;">{{ ej.series }}×{{ ej.reps }}</div><div style="font-size: 10px; color: #6B665E; letter-spacing: 0.08em; text-transform: uppercase;">series × reps</div></div>
+                <div style="min-width: 52px;"><div style="font-family: 'Cinzel', serif; font-size: 16px; color: #A8A29A;">{{ ej.descanso }}</div><div style="font-size: 10px; color: #6B665E; letter-spacing: 0.08em; text-transform: uppercase;">descanso</div></div>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B665E" stroke-width="2" style="flex-shrink: 0;"><path d="M9 6l6 6-6 6"/></svg>
+              </div>
+            </div>
+            </sc-for>
+          </div>
+        </div>
+        </sc-for>
+      </div>
+
+      <!-- recomendaciones -->
+      <div style="background: #141416; border: 1px solid rgba(198,161,91,0.16); padding: 22px; margin-top: 16px;">
+        <div style="font-family: 'Cinzel', serif; font-size: 15px; color: #E0C588; margin-bottom: 12px;">Recomendaciones</div>
+        <sc-for list="{{ rutina.recomendaciones }}" as="r" hint-placeholder-count="3">
+          <div style="display: flex; gap: 10px; padding: 6px 0; font-size: 14.5px; color: #C9C3B8; line-height: 1.5;"><span style="color: #C6A15B;">✦</span><span>{{ r }}</span></div>
+        </sc-for>
+      </div>
+    </div>
+    </sc-if>
+  </div>
+  </sc-if>
+
+  <!-- ============ ALIMENTACION ============ -->
+  <sc-if value="{{ tabAlim }}" hint-placeholder-val="{{ false }}">
+  <div style="animation: cgFade 0.4s ease both;">
+    <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: 22px; flex-wrap: wrap;">
+      <div>
+        <span style="font-family: 'Cinzel', serif; letter-spacing: 0.22em; font-size: 11px; color: #C6A15B; text-transform: uppercase;">Tu plan nutricional</span>
+        <h1 style="font-family: 'Cinzel', serif; font-weight: 700; font-size: clamp(26px, 5vw, 38px); margin: 8px 0 0;">Mi alimentación</h1>
+      </div>
+    </div>
+
+    <sc-if value="{{ loadingDieta }}" hint-placeholder-val="{{ true }}">
+      <div style="text-align: center; padding: 80px 20px;">
+        <div style="width: 40px; height: 40px; border: 3px solid rgba(198,161,91,0.25); border-top-color: #C6A15B; border-radius: 50%; animation: cgSpin 0.8s linear infinite; margin: 0 auto;"></div>
+        <p style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 22px; color: #C9C3B8; margin-top: 22px;">La IA está preparando tu dieta…</p>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ dietaLista }}" hint-placeholder-val="{{ false }}">
+    <div>
+      <p style="font-family: 'Cormorant Garamond', serif; font-size: 20px; line-height: 1.5; color: #C9C3B8; margin: 0 0 20px;">{{ dieta.resumen }}</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 24px;">
+        <div style="background: #141416; border: 1px solid rgba(198,161,91,0.2); padding: 10px 16px;"><span style="color: #8A857C; font-size: 12px;">Energía</span> <span style="font-family: 'Cinzel', serif; color: #E0C588; margin-left: 6px;">{{ dieta.calorias }}</span></div>
+        <div style="background: #141416; border: 1px solid rgba(198,161,91,0.2); padding: 10px 16px;"><span style="color: #8A857C; font-size: 12px;">Agua</span> <span style="font-family: 'Cinzel', serif; color: #E0C588; margin-left: 6px;">{{ dieta.agua }}</span></div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 14px;">
+        <sc-for list="{{ comidas }}" as="c" hint-placeholder-count="5">
+        <div style="display: grid; grid-template-columns: 118px 1fr; gap: 16px; background: #141416; border: 1px solid rgba(198,161,91,0.16); padding: 18px 20px;">
+          <div style="border-right: 1px solid rgba(198,161,91,0.15); padding-right: 12px;">
+            <div style="font-family: 'Cinzel', serif; font-size: 15px; color: #E0C588; line-height: 1.2;">{{ c.momento }}</div>
+          </div>
+          <div>
+            <sc-for list="{{ c.opciones }}" as="op" hint-placeholder-count="2">
+              <div style="display: flex; gap: 9px; padding: 4px 0; font-size: 14.5px; color: #D8CFC4; line-height: 1.5;"><span style="color: #C6A15B;">·</span><span>{{ op }}</span></div>
+            </sc-for>
+            <sc-if value="{{ c.nota }}" hint-placeholder-val="{{ false }}"><div style="font-size: 12.5px; color: #8A857C; margin-top: 6px; font-style: italic;">{{ c.nota }}</div></sc-if>
+          </div>
+        </div>
+        </sc-for>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-top: 16px;">
+        <div style="background: #141416; border: 1px solid rgba(198,161,91,0.16); padding: 20px;">
+          <div style="font-family: 'Cinzel', serif; font-size: 15px; color: #E0C588; margin-bottom: 12px;">Recomendaciones</div>
+          <sc-for list="{{ dieta.recomendaciones }}" as="r" hint-placeholder-count="3">
+            <div style="display: flex; gap: 9px; padding: 5px 0; font-size: 14px; color: #C9C3B8; line-height: 1.5;"><span style="color: #C6A15B;">✦</span><span>{{ r }}</span></div>
+          </sc-for>
+        </div>
+        <div style="background: #141416; border: 1px solid rgba(198,161,91,0.16); padding: 20px;">
+          <div style="font-family: 'Cinzel', serif; font-size: 15px; color: #E0C588; margin-bottom: 12px;">Consejos saludables</div>
+          <sc-for list="{{ dieta.consejos }}" as="cs" hint-placeholder-count="3">
+            <div style="display: flex; gap: 9px; padding: 5px 0; font-size: 14px; color: #C9C3B8; line-height: 1.5;"><span style="color: #C6A15B;">✦</span><span>{{ cs }}</span></div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+    </sc-if>
+  </div>
+  </sc-if>
+
+  <!-- ============ PROGRESO ============ -->
+  <sc-if value="{{ tabProgreso }}" hint-placeholder-val="{{ false }}">
+  <div style="animation: cgFade 0.4s ease both;">
+    <span style="font-family: 'Cinzel', serif; letter-spacing: 0.22em; font-size: 11px; color: #C6A15B; text-transform: uppercase;">Tu evolución</span>
+    <h1 style="font-family: 'Cinzel', serif; font-weight: 700; font-size: clamp(26px, 5vw, 38px); margin: 8px 0 22px;">Mi progreso</h1>
+
+    <!-- chart -->
+    <div style="background: #141416; border: 1px solid rgba(198,161,91,0.16); padding: 22px; margin-bottom: 18px;">
+      <div style="display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 16px;">
+        <div>
+          <div style="font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #8A857C;">Peso</div>
+          <div style="font-family: 'Cinzel', serif; font-size: 30px; color: #F3EEE3; margin-top: 4px;">{{ pesoUltimo }} kg</div>
+        </div>
+        <div style="text-align: right;">
+          <div style="font-family: 'Cinzel', serif; font-size: 20px; color: {{ deltaColor }};">{{ deltaTxt }} kg</div>
+          <div style="font-size: 12px; color: #8A857C;">desde el inicio</div>
+        </div>
+      </div>
+      <svg viewBox="0 0 560 180" style="width: 100%; height: auto; overflow: visible;">
+        <defs><linearGradient id="cgArea" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="rgba(198,161,91,0.32)"></stop><stop offset="100%" stop-color="rgba(198,161,91,0)"></stop></linearGradient></defs>
+        <path d="{{ areaPath }}" fill="url(#cgArea)"></path>
+        <path d="{{ linePath }}" fill="none" stroke="#C6A15B" stroke-width="2.5"></path>
+        <sc-for list="{{ chartPts }}" as="p" hint-placeholder-count="5">
+          <circle cx="{{ p.x }}" cy="{{ p.y }}" r="4" fill="#0B0B0D" stroke="#C6A15B" stroke-width="2"></circle>
+        </sc-for>
+      </svg>
+      <div style="display: flex; justify-content: space-between; margin-top: 8px;">
+        <sc-for list="{{ pesoLog }}" as="p" hint-placeholder-count="5">
+          <div style="font-size: 11px; color: #6B665E;">{{ p.fecha }}</div>
+        </sc-for>
+      </div>
+      <div style="display: flex; gap: 10px; margin-top: 18px;">
+        <input value="{{ nuevoPeso }}" onInput="{{ onNuevoPeso }}" type="number" placeholder="Registrar peso de hoy (kg)" style="flex: 1; background: #0B0B0D; border: 1px solid rgba(198,161,91,0.22); color: #F3EEE3; padding: 12px 15px; font-size: 15px; outline: none;" style-focus="border-color: #C6A15B;">
+        <button onClick="{{ addPeso }}" style="background: #C6A15B; color: #0B0B0D; border: none; padding: 12px 22px; font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer;" style-hover="background: #E0C588;">Registrar</button>
+      </div>
+    </div>
+
+    <!-- medidas -->
+    <div style="background: #141416; border: 1px solid rgba(198,161,91,0.16); padding: 22px; margin-bottom: 18px;">
+      <div style="font-family: 'Cinzel', serif; font-size: 15px; color: #E0C588; margin-bottom: 16px;">Medidas corporales (cm)</div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 14px;">
+        <div><label style="display: block; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #8A857C; margin-bottom: 7px;">Pecho</label><input data-key="pecho" value="{{ medidas.pecho }}" onInput="{{ onMedida }}" style="width: 100%; background: #0B0B0D; border: 1px solid rgba(198,161,91,0.22); color: #F3EEE3; padding: 11px 13px; font-size: 15px; outline: none;" style-focus="border-color: #C6A15B;"></div>
+        <div><label style="display: block; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #8A857C; margin-bottom: 7px;">Cintura</label><input data-key="cintura" value="{{ medidas.cintura }}" onInput="{{ onMedida }}" style="width: 100%; background: #0B0B0D; border: 1px solid rgba(198,161,91,0.22); color: #F3EEE3; padding: 11px 13px; font-size: 15px; outline: none;" style-focus="border-color: #C6A15B;"></div>
+        <div><label style="display: block; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #8A857C; margin-bottom: 7px;">Brazo</label><input data-key="brazo" value="{{ medidas.brazo }}" onInput="{{ onMedida }}" style="width: 100%; background: #0B0B0D; border: 1px solid rgba(198,161,91,0.22); color: #F3EEE3; padding: 11px 13px; font-size: 15px; outline: none;" style-focus="border-color: #C6A15B;"></div>
+        <div><label style="display: block; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #8A857C; margin-bottom: 7px;">Pierna</label><input data-key="pierna" value="{{ medidas.pierna }}" onInput="{{ onMedida }}" style="width: 100%; background: #0B0B0D; border: 1px solid rgba(198,161,91,0.22); color: #F3EEE3; padding: 11px 13px; font-size: 15px; outline: none;" style-focus="border-color: #C6A15B;"></div>
+      </div>
+    </div>
+
+    <!-- fotos -->
+    <div style="background: #141416; border: 1px solid rgba(198,161,91,0.16); padding: 22px;">
+      <div style="font-family: 'Cinzel', serif; font-size: 15px; color: #E0C588; margin-bottom: 16px;">Fotografías de progreso</div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px;">
+        <div><image-slot id="cg-foto-1" style="width: 100%; aspect-ratio: 3/4;" shape="rect" placeholder="Inicio"></image-slot><div style="text-align: center; font-size: 12px; color: #8A857C; margin-top: 6px;">Inicio</div></div>
+        <div><image-slot id="cg-foto-2" style="width: 100%; aspect-ratio: 3/4;" shape="rect" placeholder="Semana 4"></image-slot><div style="text-align: center; font-size: 12px; color: #8A857C; margin-top: 6px;">Semana 4</div></div>
+        <div><image-slot id="cg-foto-3" style="width: 100%; aspect-ratio: 3/4;" shape="rect" placeholder="Actual"></image-slot><div style="text-align: center; font-size: 12px; color: #8A857C; margin-top: 6px;">Actual</div></div>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- ============ PERFIL ============ -->
+  <sc-if value="{{ tabPerfil }}" hint-placeholder-val="{{ false }}">
+  <div style="animation: cgFade 0.4s ease both;">
+    <span style="font-family: 'Cinzel', serif; letter-spacing: 0.22em; font-size: 11px; color: #C6A15B; text-transform: uppercase;">Tu cuenta</span>
+    <h1 style="font-family: 'Cinzel', serif; font-weight: 700; font-size: clamp(26px, 5vw, 38px); margin: 8px 0 22px;">Perfil</h1>
+
+    <div style="display: flex; align-items: center; gap: 16px; background: #141416; border: 1px solid rgba(198,161,91,0.16); padding: 20px; margin-bottom: 18px;">
+      <div style="width: 56px; height: 56px; border-radius: 50%; background: linear-gradient(135deg, #C6A15B, #7A5F28); display: flex; align-items: center; justify-content: center; color: #0B0B0D; font-family: 'Cinzel', serif; font-weight: 700; font-size: 22px;">{{ inicial }}</div>
+      <div>
+        <div style="font-family: 'Cinzel', serif; font-size: 20px;">{{ nombreCompleto }}</div>
+        <div style="font-size: 13px; color: #8A857C;">{{ perfilEmail }}</div>
+      </div>
+    </div>
+
+    <div style="background: #141416; border: 1px solid rgba(198,161,91,0.16); padding: 22px; margin-bottom: 18px;">
+      <div style="font-family: 'Cinzel', serif; font-size: 15px; color: #E0C588; margin-bottom: 16px;">Datos para tu plan</div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+        <div><label style="display: block; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #8A857C; margin-bottom: 7px;">Peso (kg)</label><input data-key="peso" value="{{ f.peso }}" onInput="{{ onField }}" type="number" style="width: 100%; background: #0B0B0D; border: 1px solid rgba(198,161,91,0.22); color: #F3EEE3; padding: 12px 14px; font-size: 15px; outline: none;" style-focus="border-color: #C6A15B;"></div>
+        <div><label style="display: block; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #8A857C; margin-bottom: 7px;">Altura (cm)</label><input data-key="altura" value="{{ f.altura }}" onInput="{{ onField }}" type="number" style="width: 100%; background: #0B0B0D; border: 1px solid rgba(198,161,91,0.22); color: #F3EEE3; padding: 12px 14px; font-size: 15px; outline: none;" style-focus="border-color: #C6A15B;"></div>
+      </div>
+      <label style="display: block; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #8A857C; margin-bottom: 10px;">Objetivo</label>
+      <div style="display: flex; flex-wrap: wrap; gap: 9px; margin-bottom: 18px;">
+        <sc-for list="{{ objetivoOpts }}" as="o" hint-placeholder-count="5">
+          <button data-group="objetivo" data-value="{{ o.value }}" onClick="{{ onChoose }}" style="padding: 9px 15px; cursor: pointer; font-size: 13px; border-radius: 100px; background: {{ o.bg }}; color: {{ o.color }}; border: 1px solid {{ o.border }};">{{ o.value }}</button>
+        </sc-for>
+      </div>
+      <label style="display: block; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #8A857C; margin-bottom: 10px;">Lesiones</label>
+      <div style="display: flex; flex-wrap: wrap; gap: 9px;">
+        <sc-for list="{{ lesionOpts }}" as="l" hint-placeholder-count="9">
+          <button data-value="{{ l.value }}" onClick="{{ toggleLesion }}" style="padding: 8px 14px; cursor: pointer; font-size: 13px; border-radius: 100px; background: {{ l.bg }}; color: {{ l.color }}; border: 1px solid {{ l.border }};">{{ l.value }}</button>
+        </sc-for>
+      </div>
+    </div>
+
+    <button onClick="{{ regenerar }}" style="width: 100%; background: #C6A15B; color: #0B0B0D; border: none; padding: 15px; font-size: 13px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer; margin-bottom: 14px;" style-hover="background: #E0C588;">Actualizar y regenerar mi plan</button>
+
+    <div style="display: flex; gap: 12px;">
+      <button onClick="{{ goAdmin }}" style="flex: 1; background: transparent; color: #A8A29A; border: 1px solid rgba(198,161,91,0.28); padding: 13px; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer;" style-hover="border-color: #C6A15B; color: #C6A15B;">Panel administrativo</button>
+      <button onClick="{{ logout }}" style="flex: 1; background: transparent; color: #8A857C; border: 1px solid rgba(255,255,255,0.1); padding: 13px; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer;" style-hover="color: #D2784F; border-color: rgba(210,120,80,0.4);">Cerrar sesión</button>
+    </div>
+  </div>
+  </sc-if>
+
+  </div><!-- /padding -->
+
+  <!-- EXERCISE DETAIL MODAL -->
+  <sc-if value="{{ modalOpen }}" hint-placeholder-val="{{ false }}">
+  <div onClick="{{ closeEjercicio }}" style="position: fixed; inset: 0; z-index: 60; background: rgba(6,6,8,0.82); backdrop-filter: blur(6px); display: flex; align-items: flex-start; justify-content: center; padding: 20px 14px; overflow: auto;">
+    <div onClick="{{ stop }}" style="width: 100%; max-width: 760px; background: #101013; border: 1px solid rgba(198,161,91,0.3); animation: cgModalIn 0.35s ease both; margin: auto;">
+      <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; padding: 20px 24px; border-bottom: 1px solid rgba(198,161,91,0.16); position: sticky; top: 0; background: #101013; z-index: 2;">
+        <div>
+          <div style="font-family: 'Cinzel', serif; letter-spacing: 0.16em; font-size: 10.5px; color: #C6A15B; text-transform: uppercase;">{{ ejDia }} · {{ ejEnfoque }}</div>
+          <h2 style="font-family: 'Cinzel', serif; font-weight: 700; font-size: clamp(21px, 4vw, 29px); margin: 6px 0 0;">{{ ejNombre }}</h2>
+        </div>
+        <button onClick="{{ closeEjercicio }}" style="flex-shrink: 0; width: 38px; height: 38px; background: transparent; border: 1px solid rgba(198,161,91,0.3); color: #C6A15B; font-size: 17px; cursor: pointer;" style-hover="background: rgba(198,161,91,0.1);">✕</button>
+      </div>
+
+      <div style="padding: 22px 24px;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; margin-bottom: 22px;">
+          <div style="background: #0B0B0D; border: 1px solid rgba(198,161,91,0.16); padding: 14px; display: flex; flex-direction: column;">
+            <div style="font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: #8A857C; margin-bottom: 6px;">Demostración del movimiento</div>
+            <div style="flex: 1; display: flex; align-items: center; justify-content: center; min-height: 230px; padding: 8px 0;">{{ athleteFigure }}</div>
+            <div style="text-align: center; font-family: 'Cinzel', serif; font-size: 13px; color: #C6A15B;">{{ ejPatronLabel }}</div>
+          </div>
+          <div style="background: #0B0B0D; border: 1px solid rgba(198,161,91,0.16); padding: 14px; display: flex; flex-direction: column;">
+            <div style="font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: #8A857C; margin-bottom: 6px;">Músculos que trabaja</div>
+            <div style="flex: 1; display: flex; align-items: center; justify-content: center; min-height: 200px;">{{ muscleMap }}</div>
+            <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 10px;">
+              <sc-for list="{{ primaryLabels }}" as="pm" hint-placeholder-count="1">
+                <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: #E0C588;"><span style="width: 8px; height: 8px; background: #E8CE8C; border-radius: 50%;"></span>{{ pm.label }}</span>
+              </sc-for>
+              <sc-for list="{{ secLabels }}" as="sm" hint-placeholder-count="0">
+                <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: #8A857C;"><span style="width: 8px; height: 8px; background: rgba(198,161,91,0.5); border-radius: 50%;"></span>{{ sm.label }}</span>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px;">
+          <div style="background: #141416; border: 1px solid rgba(198,161,91,0.2); padding: 9px 14px;"><span style="color: #8A857C; font-size: 11px;">Series × Reps</span> <span style="font-family: 'Cinzel', serif; color: #E0C588; margin-left: 6px;">{{ ejSeries }}×{{ ejReps }}</span></div>
+          <div style="background: #141416; border: 1px solid rgba(198,161,91,0.2); padding: 9px 14px;"><span style="color: #8A857C; font-size: 11px;">Descanso</span> <span style="font-family: 'Cinzel', serif; color: #E0C588; margin-left: 6px;">{{ ejDescanso }}</span></div>
+          <div style="background: #141416; border: 1px solid rgba(198,161,91,0.2); padding: 9px 14px;"><span style="color: #8A857C; font-size: 11px;">Tempo</span> <span style="font-family: 'Cinzel', serif; color: #E0C588; margin-left: 6px;">{{ ejTempo }}</span></div>
+          <div style="background: #141416; border: 1px solid rgba(198,161,91,0.2); padding: 9px 14px;"><span style="color: #8A857C; font-size: 11px;">Equipo</span> <span style="font-family: 'Cinzel', serif; color: #E0C588; margin-left: 6px;">{{ ejEquipo }}</span></div>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 10px; background: rgba(198,161,91,0.06); border: 1px solid rgba(198,161,91,0.16); padding: 12px 16px; margin-bottom: 22px; font-size: 14px; color: #C9C3B8;"><span style="color: #C6A15B; font-size: 16px;">◒</span> Respiración: {{ ejRespiracion }}</div>
+
+        <div style="margin-bottom: 22px;">
+          <div style="font-family: 'Cinzel', serif; font-size: 15px; color: #E0C588; margin-bottom: 12px;">Técnica</div>
+          <sc-for list="{{ tecnicaList }}" as="tc" hint-placeholder-count="3">
+            <div style="display: flex; gap: 12px; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.04);">
+              <div style="flex-shrink: 0; width: 24px; height: 24px; border: 1px solid rgba(198,161,91,0.4); color: #C6A15B; font-family: 'Cinzel', serif; font-size: 12px; display: flex; align-items: center; justify-content: center;">{{ tc.n }}</div>
+              <div style="font-size: 14.5px; color: #D8CFC4; line-height: 1.5;">{{ tc.t }}</div>
+            </div>
+          </sc-for>
+        </div>
+
+        <div>
+          <div style="font-family: 'Cinzel', serif; font-size: 15px; color: #E0C588; margin-bottom: 12px;">Errores comunes</div>
+          <sc-for list="{{ erroresList }}" as="er" hint-placeholder-count="2">
+            <div style="display: flex; gap: 10px; padding: 6px 0; font-size: 14px; color: #C9C3B8; line-height: 1.5;"><span style="color: #D2784F;">✕</span><span>{{ er.t }}</span></div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- BOTTOM NAV -->
+  <div style="position: fixed; bottom: 0; left: 0; right: 0; z-index: 30; display: flex; justify-content: center; background: rgba(11,11,13,0.94); backdrop-filter: blur(14px); border-top: 1px solid rgba(198,161,91,0.2);">
+    <div style="display: grid; grid-template-columns: repeat(5, 1fr); width: 100%; max-width: 880px;">
+      <button data-tab="inicio" onClick="{{ setTab }}" style="display: flex; flex-direction: column; align-items: center; gap: 5px; padding: 12px 4px 14px; background: none; border: none; cursor: pointer; color: {{ navInicioColor }};">
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="{{ navInicioColor }}" stroke-width="1.5"><path d="M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10"></path></svg>
+        <span style="font-size: 10px; letter-spacing: 0.06em;">Inicio</span>
+      </button>
+      <button data-tab="rutina" onClick="{{ setTab }}" style="display: flex; flex-direction: column; align-items: center; gap: 5px; padding: 12px 4px 14px; background: none; border: none; cursor: pointer; color: {{ navRutinaColor }};">
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="{{ navRutinaColor }}" stroke-width="1.5"><path d="M12 3v18M7 6l-4 6 4 6M17 6l4 6-4 6"></path></svg>
+        <span style="font-size: 10px; letter-spacing: 0.06em;">Rutina</span>
+      </button>
+      <button data-tab="alimentacion" onClick="{{ setTab }}" style="display: flex; flex-direction: column; align-items: center; gap: 5px; padding: 12px 4px 14px; background: none; border: none; cursor: pointer; color: {{ navAlimColor }};">
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="{{ navAlimColor }}" stroke-width="1.5"><path d="M6 3v7a3 3 0 006 0V3M9 10v11M15 3c-1.5 1-2 3-2 5s.5 4 2 5v8"></path></svg>
+        <span style="font-size: 10px; letter-spacing: 0.06em;">Comidas</span>
+      </button>
+      <button data-tab="progreso" onClick="{{ setTab }}" style="display: flex; flex-direction: column; align-items: center; gap: 5px; padding: 12px 4px 14px; background: none; border: none; cursor: pointer; color: {{ navProgresoColor }};">
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="{{ navProgresoColor }}" stroke-width="1.5"><path d="M4 20V10M10 20V4M16 20v-7M4 20h16"></path></svg>
+        <span style="font-size: 10px; letter-spacing: 0.06em;">Progreso</span>
+      </button>
+      <button data-tab="perfil" onClick="{{ setTab }}" style="display: flex; flex-direction: column; align-items: center; gap: 5px; padding: 12px 4px 14px; background: none; border: none; cursor: pointer; color: {{ navPerfilColor }};">
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="{{ navPerfilColor }}" stroke-width="1.5"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c0-4 4-6 8-6s8 2 8 6"></path></svg>
+        <span style="font-size: 10px; letter-spacing: 0.06em;">Perfil</span>
+      </button>
+    </div>
+  </div>
+</div>
+</sc-if>
+
+<!-- ============================ ADMIN ============================ -->
+<sc-if value="{{ isAdmin }}" hint-placeholder-val="{{ false }}">
+<div style="min-height: 100vh; display: grid; grid-template-columns: 240px 1fr;">
+  <!-- sidebar -->
+  <div style="background: #101012; border-right: 1px solid rgba(198,161,91,0.16); padding: 24px 18px; display: flex; flex-direction: column;">
+    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 34px;">
+      <div style="width: 30px; height: 30px; border: 1.5px solid #C6A15B; display: flex; align-items: center; justify-content: center; color: #C6A15B; font-family: 'Cinzel', serif; font-weight: 800; font-size: 15px;">Y</div>
+      <div style="font-family: 'Cinzel', serif; font-weight: 700; letter-spacing: 0.18em; font-size: 12px;">ADMIN</div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 4px;">
+      <div style="padding: 11px 14px; background: rgba(198,161,91,0.12); border-left: 2px solid #C6A15B; color: #E0C588; font-size: 14px;">Usuarios</div>
+      <div style="padding: 11px 14px; color: #8A857C; font-size: 14px;">Estadísticas</div>
+      <div style="padding: 11px 14px; color: #8A857C; font-size: 14px;">Anuncios</div>
+      <div style="padding: 11px 14px; color: #8A857C; font-size: 14px;">Configuración</div>
+    </div>
+    <button onClick="{{ exitAdmin }}" style="margin-top: auto; background: transparent; color: #A8A29A; border: 1px solid rgba(198,161,91,0.28); padding: 11px; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer;" style-hover="border-color: #C6A15B; color: #C6A15B;">← Volver a la app</button>
+  </div>
+
+  <!-- content -->
+  <div style="padding: clamp(24px, 4vw, 44px); background: #0B0B0D; overflow: auto;">
+    <div style="display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 28px; flex-wrap: wrap; gap: 12px;">
+      <div>
+        <span style="font-family: 'Cinzel', serif; letter-spacing: 0.22em; font-size: 11px; color: #C6A15B; text-transform: uppercase;">Panel administrativo</span>
+        <h1 style="font-family: 'Cinzel', serif; font-weight: 700; font-size: 34px; margin: 8px 0 0;">Usuarios registrados</h1>
+      </div>
+      <input placeholder="Buscar usuario…" style="background: #141416; border: 1px solid rgba(198,161,91,0.22); color: #F3EEE3; padding: 11px 15px; font-size: 14px; outline: none; width: 220px;" style-focus="border-color: #C6A15B;">
+    </div>
+
+    <!-- stats -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-bottom: 28px;">
+      <sc-for list="{{ adminStats }}" as="st" hint-placeholder-count="4">
+      <div style="background: #141416; border: 1px solid rgba(198,161,91,0.16); padding: 22px;">
+        <div style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #8A857C;">{{ st.label }}</div>
+        <div style="font-family: 'Cinzel', serif; font-size: 32px; color: #E0C588; margin-top: 8px;">{{ st.value }}</div>
+        <div style="font-size: 12px; color: #6B8A5F; margin-top: 4px;">{{ st.delta }}</div>
+      </div>
+      </sc-for>
+    </div>
+
+    <!-- users table -->
+    <div style="background: #141416; border: 1px solid rgba(198,161,91,0.16);">
+      <div style="display: grid; grid-template-columns: 2fr 1.3fr 1fr 1fr 1.2fr; gap: 12px; padding: 14px 20px; border-bottom: 1px solid rgba(198,161,91,0.16); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #8A857C;">
+        <div>Usuario</div><div>Objetivo</div><div>Estado</div><div>Planes</div><div style="text-align: right;">Acciones</div>
+      </div>
+      <sc-for list="{{ adminUsers }}" as="u" hint-placeholder-count="6">
+      <div style="display: grid; grid-template-columns: 2fr 1.3fr 1fr 1fr 1.2fr; gap: 12px; padding: 15px 20px; border-bottom: 1px solid rgba(255,255,255,0.04); align-items: center;">
+        <div style="display: flex; align-items: center; gap: 11px;">
+          <div style="width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, #C6A15B, #7A5F28); display: flex; align-items: center; justify-content: center; color: #0B0B0D; font-family: 'Cinzel', serif; font-weight: 700; font-size: 12px;">{{ u.inicial }}</div>
+          <div><div style="font-size: 14px; color: #F3EEE3;">{{ u.nombre }}</div><div style="font-size: 12px; color: #6B665E;">{{ u.email }}</div></div>
+        </div>
+        <div style="font-size: 13.5px; color: #C9C3B8;">{{ u.objetivo }}</div>
+        <div><span style="font-size: 12px; padding: 4px 10px; border-radius: 100px; background: {{ u.estadoBg }}; color: {{ u.estadoColor }};">{{ u.estado }}</span></div>
+        <div style="font-family: 'Cinzel', serif; font-size: 15px; color: #E0C588;">{{ u.planes }}</div>
+        <div style="display: flex; gap: 8px; justify-content: flex-end;">
+          <button style="background: transparent; border: 1px solid rgba(198,161,91,0.3); color: #A8A29A; padding: 6px 12px; font-size: 12px; cursor: pointer;" style-hover="border-color: #C6A15B; color: #C6A15B;">Editar</button>
+          <button style="background: transparent; border: 1px solid rgba(210,120,80,0.3); color: #C08466; padding: 6px 12px; font-size: 12px; cursor: pointer;" style-hover="border-color: #D2784F; color: #D2784F;">Suspender</button>
+        </div>
+      </div>
+      </sc-for>
+    </div>
+
+    <!-- anuncios + config -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin-top: 20px;">
+      <div style="background: #141416; border: 1px solid rgba(198,161,91,0.16); padding: 22px;">
+        <div style="font-family: 'Cinzel', serif; font-size: 15px; color: #E0C588; margin-bottom: 14px;">Anuncio global</div>
+        <textarea placeholder="Escribe un mensaje para todos los usuarios…" rows="3" style="width: 100%; background: #0B0B0D; border: 1px solid rgba(198,161,91,0.22); color: #F3EEE3; padding: 12px 14px; font-size: 14px; outline: none; resize: vertical; font-family: inherit; margin-bottom: 12px;" style-focus="border-color: #C6A15B;"></textarea>
+        <button style="background: #C6A15B; color: #0B0B0D; border: none; padding: 11px 20px; font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer;" style-hover="background: #E0C588;">Publicar</button>
+      </div>
+      <div style="background: #141416; border: 1px solid rgba(198,161,91,0.16); padding: 22px;">
+        <div style="font-family: 'Cinzel', serif; font-size: 15px; color: #E0C588; margin-bottom: 14px;">Parámetros generales</div>
+        <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px; color: #C9C3B8;"><span>Registro de nuevos usuarios</span><span style="color: #6B8A5F;">Activo</span></div>
+        <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px; color: #C9C3B8;"><span>Motor de IA</span><span style="color: #E0C588;">DeepSeek</span></div>
+        <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 0; font-size: 14px; color: #C9C3B8;"><span>Plan Premium</span><span style="color: #8A857C;">Próximamente</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  state = {
+    screen: 'landing',      // landing | auth | onboarding | app | admin
+    authMode: 'register',   // login | register
+    onboardStep: 0,
+    tab: 'inicio',          // inicio | rutina | alimentacion | progreso | perfil
+    bannerIndex: 0,
+    form: {
+      nombre: '', email: '', edad: '', sexo: '', peso: '', altura: '',
+      objetivo: '', tieneLesion: null, lesiones: [], lesionDesc: '',
+      nivel: 'Principiante', dias: '4'
+    },
+    rutina: null, dieta: null,
+    loadingRutina: false, loadingDieta: false,
+    errRutina: false, errDieta: false,
+    pesoLog: [
+      { fecha: '02 Jun', peso: 84.5 }, { fecha: '09 Jun', peso: 83.2 },
+      { fecha: '16 Jun', peso: 82.4 }, { fecha: '23 Jun', peso: 81.6 },
+      { fecha: '30 Jun', peso: 80.9 }
+    ],
+    medidas: { pecho: '102', cintura: '86', brazo: '36', pierna: '58' },
+    nuevoPeso: '',
+    openEj: null
+  };
+
+  quotes = [
+    'La disciplina es el puente entre las metas y los logros.',
+    'No cuentes los días. Haz que los días cuenten.',
+    'El cuerpo logra lo que la mente cree.',
+    'Conócete a ti mismo, y luego supérate.',
+    'La excelencia no es un acto, sino un hábito.'
+  ];
+
+  componentDidMount() {
+    this._banner = setInterval(() => {
+      this.setState(s => ({ bannerIndex: (s.bannerIndex + 1) % this.quotes.length }));
+    }, 5200);
+  }
+  componentWillUnmount() { clearInterval(this._banner); }
+
+  knownMuscles = new Set(['pecho','hombro','biceps','triceps','antebrazo','abdomen','oblicuos','dorsal','trapecio','lumbar','cuadriceps','isquios','gluteos','gemelos','aductores']);
+  muscleLabels = { pecho:'Pectoral', hombro:'Deltoides', biceps:'Bíceps', triceps:'Tríceps', antebrazo:'Antebrazo', abdomen:'Abdomen', oblicuos:'Oblicuos', dorsal:'Dorsal', trapecio:'Trapecio', lumbar:'Lumbar', cuadriceps:'Cuádriceps', isquios:'Isquiotibiales', gluteos:'Glúteos', gemelos:'Gemelos', aductores:'Aductores' };
+
+  patronInfo = {
+    'press-horizontal': { label:'Empuje horizontal', musculos:['pecho'], musculosSec:['hombro','triceps'], tempo:'2-0-1', respiracion:'Inhala al bajar, exhala al empujar', equipo:'Barra o mancuernas', tecnica:['Retrae y deprime las escápulas.','Baja al esternón con los codos a ~45°.','Empuja sin bloquear los codos de golpe.'], errores:['Rebotar la barra en el pecho.','Despegar los glúteos del banco.'] },
+    'press-vertical': { label:'Empuje vertical', musculos:['hombro'], musculosSec:['triceps','trapecio'], tempo:'2-0-1', respiracion:'Exhala al subir', equipo:'Barra o mancuernas', tecnica:['Core firme y costillas hacia abajo.','Empuja sobre la cabeza sin arquear la espalda.','Alinea las muñecas sobre los codos.'], errores:['Arquear la zona lumbar.','Dejar la carga por delante de la cabeza.'] },
+    'jalon': { label:'Tracción vertical', musculos:['dorsal'], musculosSec:['biceps','trapecio'], tempo:'2-1-2', respiracion:'Exhala al jalar', equipo:'Polea alta', tecnica:['Lleva los codos hacia las costillas.','Baja a la clavícula sin balanceo.','Controla la subida manteniendo la tensión.'], errores:['Impulsar con el tronco.','Encoger los hombros.'] },
+    'remo': { label:'Tracción horizontal', musculos:['dorsal'], musculosSec:['biceps','trapecio'], tempo:'2-1-2', respiracion:'Exhala al jalar', equipo:'Barra, mancuerna o polea', tecnica:['Espalda neutra y pecho arriba.','Lleva el codo atrás pegado al cuerpo.','Junta las escápulas al final.'], errores:['Redondear la espalda.','Usar impulso de cadera.'] },
+    'curl': { label:'Flexión de codo', musculos:['biceps'], musculosSec:['antebrazo'], tempo:'2-1-2', respiracion:'Exhala al subir', equipo:'Mancuernas o barra', tecnica:['Codos fijos a los costados.','Sube controlando, sin balancear.','Aprieta arriba y baja lento.'], errores:['Adelantar los codos.','Usar impulso de la espalda.'] },
+    'extension-triceps': { label:'Extensión de codo', musculos:['triceps'], musculosSec:[], tempo:'2-0-2', respiracion:'Exhala al extender', equipo:'Polea o mancuerna', tecnica:['Codos fijos apuntando al frente.','Extiende del todo sin golpear.','Controla el regreso.'], errores:['Abrir los codos.','Mover el hombro.'] },
+    'elevacion-lateral': { label:'Abducción de hombro', musculos:['hombro'], musculosSec:['trapecio'], tempo:'1-1-2', respiracion:'Exhala al subir', equipo:'Mancuernas', tecnica:['Mantén una ligera flexión de codo.','Sube hasta la altura de los hombros.','Lidera el gesto con los codos.'], errores:['Subir con impulso.','Encoger el cuello.'] },
+    'sentadilla': { label:'Dominante de rodilla', musculos:['cuadriceps','gluteos'], musculosSec:['isquios','lumbar'], tempo:'3-1-1', respiracion:'Inhala al bajar, exhala al subir', equipo:'Barra o peso corporal', tecnica:['Pies al ancho de hombros, puntas algo afuera.','Baja llevando la cadera atrás y abajo.','Rodillas en línea con los pies.'], errores:['Que las rodillas se metan hacia dentro.','Levantar los talones.'] },
+    'peso-muerto': { label:'Dominante de cadera', musculos:['isquios','gluteos'], musculosSec:['lumbar','dorsal'], tempo:'2-1-2', respiracion:'Exhala al subir', equipo:'Barra o mancuernas', tecnica:['Espalda neutra en todo el recorrido.','Empuja el suelo llevando la cadera al frente.','Mantén la carga pegada al cuerpo.'], errores:['Redondear la espalda baja.','Hiperextender al final.'] },
+    'zancada': { label:'Unilateral de pierna', musculos:['cuadriceps','gluteos'], musculosSec:['isquios'], tempo:'2-0-1', respiracion:'Exhala al subir', equipo:'Mancuernas o peso corporal', tecnica:['Paso firme y tronco erguido.','Baja la rodilla trasera hacia el suelo.','Empuja con el talón delantero.'], errores:['Adelantar demasiado la rodilla.','Perder el equilibrio del tronco.'] },
+    'abdomen': { label:'Core', musculos:['abdomen'], musculosSec:['oblicuos'], tempo:'2-1-2', respiracion:'Exhala en el esfuerzo', equipo:'Peso corporal', tecnica:['Activa el abdomen antes de moverte.','No tires del cuello con las manos.','Controla la fase de bajada.'], errores:['Aguantar la respiración.','Usar impulso.'] },
+    'cardio': { label:'Acondicionamiento', musculos:['cuadriceps','gemelos'], musculosSec:['abdomen','gluteos'], tempo:'Continuo', respiracion:'Rítmica y constante', equipo:'Peso corporal', tecnica:['Mantén un ritmo sostenible.','Aterriza suave con el mediopié.','Respira de forma rítmica.'], errores:['Empezar demasiado fuerte.','Perder la postura al cansarte.'] },
+    'generico': { label:'General', musculos:[], musculosSec:[], tempo:'2-1-2', respiracion:'Exhala en el esfuerzo', equipo:'—', tecnica:['Ejecuta con técnica controlada.','Mantén el core activo.','Respira de forma constante.'], errores:['Sacrificar la técnica por la carga.'] }
+  };
+
+  inferPatron(nombre) {
+    const n = (nombre || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    const has = (...ks) => ks.some(k => n.includes(k));
+    if (has('zancada','desplante','lunge','bulgar','split squat')) return 'zancada';
+    if (has('sentadilla','squat','prensa','pistol','hack')) return 'sentadilla';
+    if (has('peso muerto','muerto','hip thrust','puente','rumano','buenos dias','glute')) return 'peso-muerto';
+    if (has('press militar','militar','press de hombro','overhead','arnold')) return 'press-vertical';
+    if (has('elevacion lateral','lateral','pajaro','vuelo','face pull')) return 'elevacion-lateral';
+    if (has('jalon','dominada','pull up','pull-up','pullover','pulldown','pull down')) return 'jalon';
+    if (has('remo','row')) return 'remo';
+    if (has('curl')) return 'curl';
+    if (has('triceps','patada','frances','copa','fondo en banco','extension de codo')) return 'extension-triceps';
+    if (has('press','banca','flexion','fondo','push up','push-up','pecho','apertura','pec')) return 'press-horizontal';
+    if (has('plancha','abdomen','abdominal','crunch','core','russian','elevacion de pierna','rueda','ab wheel','mountain','encogimiento')) return 'abdomen';
+    if (has('burpee','salto','cuerda','correr','trote','carrera','jumping','sprint','eliptica','bici','cardio','escalador')) return 'cardio';
+    return 'generico';
+  }
+
+  inferEjercicio(ej) {
+    ej = ej || {};
+    const vk = (a) => Array.isArray(a) ? a.filter(x => this.knownMuscles.has(x)) : [];
+    const arr = (a, f) => (Array.isArray(a) && a.length) ? a : f.slice();
+    const patron = this.patronInfo[ej.patron] ? ej.patron : this.inferPatron(ej.nombre);
+    const info = this.patronInfo[patron] || this.patronInfo['generico'];
+    return Object.assign({}, ej, {
+      nombre: ej.nombre || 'Ejercicio', series: ej.series || 3, reps: ej.reps || '10', descanso: ej.descanso || '60 s', nota: ej.nota || '',
+      patron, patronLabel: info.label,
+      musculos: vk(ej.musculos).length ? vk(ej.musculos) : info.musculos.slice(),
+      musculosSec: vk(ej.musculosSec).length ? vk(ej.musculosSec) : info.musculosSec.slice(),
+      tecnica: arr(ej.tecnica, info.tecnica), errores: arr(ej.errores, info.errores),
+      tempo: ej.tempo || info.tempo, respiracion: ej.respiracion || info.respiracion, equipo: ej.equipo || info.equipo
+    });
+  }
+
+  normalizeRutina(data) {
+    data = data || {};
+    return Object.assign({}, data, {
+      resumen: data.resumen || '',
+      diasPorSemana: data.diasPorSemana || (data.dias ? data.dias.length : 0),
+      duracionEstimada: data.duracionEstimada || '—',
+      intensidad: data.intensidad || 'Media',
+      advertencias: Array.isArray(data.advertencias) ? data.advertencias : [],
+      recomendaciones: Array.isArray(data.recomendaciones) ? data.recomendaciones : [],
+      dias: (Array.isArray(data.dias) ? data.dias : []).map(d => Object.assign({}, d, {
+        nombre: d.nombre || 'Día', enfoque: d.enfoque || '', duracion: d.duracion || '—',
+        ejercicios: (Array.isArray(d.ejercicios) ? d.ejercicios : []).map(e => this.inferEjercicio(e))
+      }))
+    });
+  }
+
+  openEjercicio = (e) => this.setState({ openEj: e.currentTarget.dataset.id });
+  closeEjercicio = () => this.setState({ openEj: null });
+  stop = (e) => e.stopPropagation();
+
+  muscleMapEl(prim, sec) {
+    const h = React.createElement;
+    const P = new Set(prim || []), S = new Set(sec || []);
+    const col = (k) => P.has(k) ? '#E8CE8C' : (S.has(k) ? 'rgba(198,161,91,0.5)' : '#26262E');
+    const stl = (k) => P.has(k) ? { animation: 'cgMusclePulse 1.6s ease-in-out infinite' } : {};
+    const m = (k, tag, attrs) => h(tag, Object.assign({ key: tag + attrs.cx + '' + attrs.x + k, fill: col(k), stroke: '#0B0B0D', strokeWidth: 0.6, style: stl(k) }, attrs));
+    const G = '#16161C', GS = '#33333C';
+    const base = (ox) => h('g', { key: 'b' + ox },
+      h('circle', { cx: ox + 55, cy: 22, r: 14, fill: G, stroke: GS, strokeWidth: 1.4 }),
+      h('rect', { x: ox + 48, y: 33, width: 14, height: 12, fill: G, stroke: GS, strokeWidth: 1.4 }),
+      h('rect', { x: ox + 33, y: 42, width: 44, height: 76, rx: 18, fill: G, stroke: GS, strokeWidth: 1.4 }),
+      h('rect', { x: ox + 19, y: 46, width: 15, height: 42, rx: 7, fill: G, stroke: GS, strokeWidth: 1.4 }),
+      h('rect', { x: ox + 18, y: 86, width: 13, height: 36, rx: 6, fill: G, stroke: GS, strokeWidth: 1.4 }),
+      h('rect', { x: ox + 76, y: 46, width: 15, height: 42, rx: 7, fill: G, stroke: GS, strokeWidth: 1.4 }),
+      h('rect', { x: ox + 79, y: 86, width: 13, height: 36, rx: 6, fill: G, stroke: GS, strokeWidth: 1.4 }),
+      h('rect', { x: ox + 37, y: 116, width: 16, height: 52, rx: 8, fill: G, stroke: GS, strokeWidth: 1.4 }),
+      h('rect', { x: ox + 38, y: 166, width: 13, height: 46, rx: 6, fill: G, stroke: GS, strokeWidth: 1.4 }),
+      h('rect', { x: ox + 57, y: 116, width: 16, height: 52, rx: 8, fill: G, stroke: GS, strokeWidth: 1.4 }),
+      h('rect', { x: ox + 58, y: 166, width: 13, height: 46, rx: 6, fill: G, stroke: GS, strokeWidth: 1.4 })
+    );
+    const front = (ox) => h('g', { key: 'f' + ox },
+      m('trapecio', 'rect', { x: ox + 40, y: 40, width: 11, height: 8, rx: 3 }), m('trapecio', 'rect', { x: ox + 59, y: 40, width: 11, height: 8, rx: 3 }),
+      m('hombro', 'ellipse', { cx: ox + 27, cy: 52, rx: 9, ry: 8 }), m('hombro', 'ellipse', { cx: ox + 83, cy: 52, rx: 9, ry: 8 }),
+      m('pecho', 'ellipse', { cx: ox + 46, cy: 58, rx: 10, ry: 8 }), m('pecho', 'ellipse', { cx: ox + 64, cy: 58, rx: 10, ry: 8 }),
+      m('biceps', 'ellipse', { cx: ox + 26, cy: 74, rx: 7, ry: 11 }), m('biceps', 'ellipse', { cx: ox + 84, cy: 74, rx: 7, ry: 11 }),
+      m('antebrazo', 'ellipse', { cx: ox + 24, cy: 100, rx: 6, ry: 12 }), m('antebrazo', 'ellipse', { cx: ox + 86, cy: 100, rx: 6, ry: 12 }),
+      m('abdomen', 'rect', { x: ox + 46, y: 70, width: 18, height: 40, rx: 5 }),
+      m('oblicuos', 'ellipse', { cx: ox + 40, cy: 92, rx: 4, ry: 12 }), m('oblicuos', 'ellipse', { cx: ox + 70, cy: 92, rx: 4, ry: 12 }),
+      m('cuadriceps', 'ellipse', { cx: ox + 45, cy: 146, rx: 9, ry: 22 }), m('cuadriceps', 'ellipse', { cx: ox + 65, cy: 146, rx: 9, ry: 22 }),
+      m('aductores', 'ellipse', { cx: ox + 55, cy: 142, rx: 5, ry: 16 })
+    );
+    const back = (ox) => h('g', { key: 'k' + ox },
+      m('trapecio', 'rect', { x: ox + 42, y: 40, width: 26, height: 17, rx: 4 }),
+      m('hombro', 'ellipse', { cx: ox + 27, cy: 52, rx: 9, ry: 8 }), m('hombro', 'ellipse', { cx: ox + 83, cy: 52, rx: 9, ry: 8 }),
+      m('dorsal', 'ellipse', { cx: ox + 43, cy: 76, rx: 9, ry: 17 }), m('dorsal', 'ellipse', { cx: ox + 67, cy: 76, rx: 9, ry: 17 }),
+      m('lumbar', 'rect', { x: ox + 48, y: 98, width: 14, height: 14, rx: 4 }),
+      m('triceps', 'ellipse', { cx: ox + 26, cy: 74, rx: 7, ry: 11 }), m('triceps', 'ellipse', { cx: ox + 84, cy: 74, rx: 7, ry: 11 }),
+      m('gluteos', 'ellipse', { cx: ox + 46, cy: 122, rx: 10, ry: 11 }), m('gluteos', 'ellipse', { cx: ox + 64, cy: 122, rx: 10, ry: 11 }),
+      m('isquios', 'ellipse', { cx: ox + 45, cy: 150, rx: 9, ry: 20 }), m('isquios', 'ellipse', { cx: ox + 65, cy: 150, rx: 9, ry: 20 }),
+      m('gemelos', 'ellipse', { cx: ox + 45, cy: 188, rx: 7, ry: 14 }), m('gemelos', 'ellipse', { cx: ox + 65, cy: 188, rx: 7, ry: 14 })
+    );
+    const cap = (x, t) => h('text', { key: 't' + x, x, y: 228, fill: '#6B665E', fontSize: 9, fontFamily: 'Jost, sans-serif', letterSpacing: 1.5, textAnchor: 'middle' }, t);
+    return h('svg', { viewBox: '0 0 240 234', style: { width: '100%', height: 'auto', maxHeight: '250px' } },
+      base(5), front(5), base(125), back(125), cap(60, 'FRENTE'), cap(180, 'ESPALDA')
+    );
+  }
+
+  athleteFigureEl(patron) {
+    const h = React.createElement;
+    const P = {
+      'press-horizontal': { armUpperFixed: 34, fore: 'cgExtendFore' },
+      'press-vertical': { armUpper: 'cgOverhead', fore: 'cgForePress' },
+      'jalon': { armUpper: 'cgPulldown', foreFixed: -14 },
+      'remo': { armUpperFixed: 48, fore: 'cgRow', torsoFixed: 10 },
+      'curl': { armUpperFixed: 6, fore: 'cgCurl' },
+      'extension-triceps': { armUpperFixed: 152, fore: 'cgTriExt' },
+      'elevacion-lateral': { armUpper: 'cgRaise' },
+      'sentadilla': { body: 'cgSquatBody', thigh: 'cgThighSquat', shin: 'cgShinSquat' },
+      'peso-muerto': { body: 'cgHingeBody', torso: 'cgHinge' },
+      'zancada': { body: 'cgLungeBody', thigh: 'cgMarch', shin: 'cgShinBend', alt: true },
+      'abdomen': { torso: 'cgCrunch', thighFixed: -26 },
+      'cardio': { body: 'cgBob', thigh: 'cgMarch', armUpper: 'cgSwing', alt: true },
+      'generico': { body: 'cgBob', armUpper: 'cgSwing', alt: true }
+    };
+    const c = P[patron] || P['generico'];
+    const dur = '2.4s';
+    const delayR = c.alt ? '-1.2s' : '0s';
+    const mk = (anim, fixed, origin, delay) => {
+      if (anim) return { animation: anim + ' ' + dur + ' ease-in-out infinite', animationDelay: delay || '0s', transformBox: 'fill-box', transformOrigin: origin };
+      if (fixed != null) return { transform: 'rotate(' + fixed + 'deg)', transformBox: 'fill-box', transformOrigin: origin };
+      return {};
+    };
+    const OL = '#0B0B0D';
+    const arm = (delay, key) => h('g', { key, style: mk(c.armUpper, c.armUpperFixed != null ? c.armUpperFixed : null, '50% 0', delay) },
+      h('rect', { x: 64, y: 64, width: 16, height: 46, rx: 8, fill: '#BD9950', stroke: OL, strokeWidth: 2 }),
+      h('g', { style: mk(c.fore, c.foreFixed != null ? c.foreFixed : null, '50% 0', delay) },
+        h('rect', { x: 65, y: 108, width: 14, height: 40, rx: 7, fill: '#C6A15B', stroke: OL, strokeWidth: 2 }),
+        h('circle', { cx: 72, cy: 150, r: 7, fill: '#C6A15B', stroke: OL, strokeWidth: 2 })
+      )
+    );
+    const leg = (delay, key) => h('g', { key, style: mk(c.thigh, c.thighFixed != null ? c.thighFixed : null, '50% 0', delay) },
+      h('rect', { x: 78, y: 150, width: 16, height: 52, rx: 8, fill: '#B48F49', stroke: OL, strokeWidth: 2 }),
+      h('g', { style: mk(c.shin, c.shinFixed != null ? c.shinFixed : null, '50% 0', delay) },
+        h('rect', { x: 79, y: 200, width: 14, height: 48, rx: 7, fill: '#C6A15B', stroke: OL, strokeWidth: 2 }),
+        h('ellipse', { cx: 92, cy: 250, rx: 11, ry: 5, fill: '#C6A15B', stroke: OL, strokeWidth: 2 })
+      )
+    );
+    const mirror = (child, key) => h('g', { key, style: { transform: 'translateX(200px) scaleX(-1)', transformBox: 'view-box', transformOrigin: '0px 0px' } }, child);
+    const torso = h('g', { key: 'torso', style: mk(c.torso, c.torsoFixed != null ? c.torsoFixed : null, '50% 100%', 0) },
+      h('rect', { x: 76, y: 58, width: 48, height: 96, rx: 20, fill: '#C6A15B', stroke: OL, strokeWidth: 2 }),
+      h('rect', { x: 92, y: 48, width: 16, height: 14, rx: 4, fill: '#C6A15B', stroke: OL, strokeWidth: 2 }),
+      h('circle', { cx: 100, cy: 32, r: 18, fill: '#C6A15B', stroke: OL, strokeWidth: 2 }),
+      arm('0s', 'aL'), mirror(arm(delayR, 'aRc'), 'aR')
+    );
+    const root = h('g', { style: c.body ? { animation: c.body + ' ' + dur + ' ease-in-out infinite' } : {} },
+      leg('0s', 'lL'), mirror(leg(delayR, 'lRc'), 'lR'), torso
+    );
+    return h('svg', { viewBox: '0 0 200 268', style: { width: '100%', height: 'auto', maxHeight: '250px' } }, root);
+  }
+
+  // ---------- navigation ----------
+  goLogin = () => this.setState({ screen: 'auth', authMode: 'login' });
+  goRegister = () => this.setState({ screen: 'auth', authMode: 'register' });
+  goLanding = () => this.setState({ screen: 'landing' });
+  setAuthMode = (m) => this.setState({ authMode: m });
+  setBanner = (e) => this.setState({ bannerIndex: Number(e.currentTarget.dataset.i) });
+  setTab = (e) => { const t = e.currentTarget.dataset.tab; this.setState({ tab: t }); window.scrollTo(0, 0); };
+  goAdmin = () => this.setState({ screen: 'admin' });
+  exitAdmin = () => this.setState({ screen: 'app', tab: 'inicio' });
+  logout = () => this.setState({ screen: 'landing' });
+
+  // ---------- forms ----------
+  onField = (e) => {
+    const k = e.currentTarget.dataset.key; const v = e.currentTarget.value;
+    this.setState(s => ({ form: { ...s.form, [k]: v } }));
+  };
+  onChoose = (e) => {
+    const g = e.currentTarget.dataset.group; const v = e.currentTarget.dataset.value;
+    this.setState(s => ({ form: { ...s.form, [g]: v } }));
+  };
+  setLesion = (e) => {
+    const v = e.currentTarget.dataset.value === 'true';
+    this.setState(s => ({ form: { ...s.form, tieneLesion: v, lesiones: v ? s.form.lesiones : [], lesionDesc: v ? s.form.lesionDesc : '' } }));
+  };
+  toggleLesion = (e) => {
+    const l = e.currentTarget.dataset.value;
+    this.setState(s => {
+      const has = s.form.lesiones.includes(l);
+      return { form: { ...s.form, lesiones: has ? s.form.lesiones.filter(x => x !== l) : [...s.form.lesiones, l] } };
+    });
+  };
+
+  submitAuth = () => {
+    if (this.state.authMode === 'login') {
+      // demo login → straight to app with sample identity
+      this.setState(s => ({ screen: 'app', tab: 'inicio', form: { ...s.form, nombre: s.form.nombre || 'Atleta' } }));
+      this.ensurePlans();
+    } else {
+      this.setState({ screen: 'onboarding', onboardStep: 0 });
+    }
+  };
+
+  nextStep = () => this.setState(s => ({ onboardStep: Math.min(s.onboardStep + 1, 2) }));
+  prevStep = () => this.setState(s => ({ onboardStep: Math.max(s.onboardStep - 1, 0) }));
+
+  finishOnboarding = () => {
+    this.setState({ screen: 'app', tab: 'inicio', rutina: null, dieta: null });
+    this.generarRutina();
+    this.generarDieta();
+  };
+
+  ensurePlans = () => {
+    if (!this.state.rutina && !this.state.loadingRutina) this.generarRutina();
+    if (!this.state.dieta && !this.state.loadingDieta) this.generarDieta();
+  };
+
+  regenerar = () => {
+    this.setState({ rutina: null, dieta: null });
+    this.generarRutina();
+    this.generarDieta();
+  };
+
+  // ---------- AI ----------
+  _perfilTexto() {
+    const f = this.state.form;
+    const les = f.tieneLesion && f.lesiones.length ? `${f.lesiones.join(', ')}${f.lesionDesc ? ' (' + f.lesionDesc + ')' : ''}` : 'ninguna';
+    return `Nombre: ${f.nombre || 'Usuario'}. Edad: ${f.edad || 'n/d'}. Sexo: ${f.sexo || 'n/d'}. Peso: ${f.peso || 'n/d'} kg. Altura: ${f.altura || 'n/d'} cm. Objetivo: ${f.objetivo || 'Mantenerse'}. Nivel: ${f.nivel}. Días disponibles: ${f.dias}. Lesiones: ${les}.`;
+  }
+  _parseJSON(txt) {
+    let t = (txt || '').trim();
+    t = t.replace(/^```(json)?/i, '').replace(/```$/,'').trim();
+    const a = t.indexOf('{'); const b = t.lastIndexOf('}');
+    if (a >= 0 && b > a) t = t.slice(a, b + 1);
+    return JSON.parse(t);
+  }
+
+  async generarRutina() {
+    this.setState({ loadingRutina: true, errRutina: false });
+    const prompt = `Eres un entrenador personal profesional. Crea una rutina de entrenamiento COMPLETAMENTE personalizada para este usuario:\n${this._perfilTexto()}\n\nResponde SOLO con JSON válido (sin texto extra), con esta forma exacta:\n{"resumen":"1-2 frases motivadoras y sobrias","diasPorSemana":number,"duracionEstimada":"ej: 50 min","intensidad":"Baja|Media|Media-alta|Alta","advertencias":["si hay lesión, cómo protegerla"],"recomendaciones":["3-4 consejos"],"dias":[{"nombre":"Día 1","enfoque":"grupo muscular","duracion":"ej: 50 min","ejercicios":[{"nombre":"","series":number,"reps":"ej: 8-10","descanso":"ej: 90 s","nota":"opcional o vacío","patron":"exactamente uno de: press-horizontal|press-vertical|jalon|remo|curl|extension-triceps|elevacion-lateral|sentadilla|peso-muerto|zancada|abdomen|cardio","musculos":["1-2 claves de: pecho,hombro,biceps,triceps,antebrazo,abdomen,oblicuos,dorsal,trapecio,lumbar,cuadriceps,isquios,gluteos,gemelos,aductores"],"musculosSec":["0-2 de la misma lista"],"tecnica":["3 claves de ejecución"],"errores":["2 errores comunes"],"tempo":"ej: 2-1-2","respiracion":"ej: exhala al empujar","equipo":"ej: mancuernas"}]}]}\nUsa SOLO los valores de patron y de músculos indicados. Genera entre ${this.state.form.dias || 4} días. Cada día 4-6 ejercicios. Español. Tono sobrio y elegante.`;
+    try {
+      const txt = await window.claude.complete({ messages: [{ role: 'user', content: prompt }], max_tokens: 3000 });
+      const data = this.normalizeRutina(this._parseJSON(txt));
+      this.setState({ rutina: data, loadingRutina: false });
+    } catch (err) {
+      this.setState({ rutina: this.normalizeRutina(this._fallbackRutina()), loadingRutina: false, errRutina: true });
+    }
+  }
+
+  async generarDieta() {
+    this.setState({ loadingDieta: true, errDieta: false });
+    const prompt = `Eres un nutricionista profesional. Crea un plan de alimentación diario COMPLETAMENTE personalizado para este usuario:\n${this._perfilTexto()}\n\nResponde SOLO con JSON válido (sin texto extra), con esta forma exacta:\n{"resumen":"1-2 frases","calorias":"ej: ~2200 kcal","agua":"ej: 3 L","comidas":[{"momento":"Desayuno|Media mañana|Almuerzo|Merienda|Cena","opciones":["2-3 opciones concretas con porciones"],"nota":"opcional"}],"recomendaciones":["3-4"],"consejos":["3-4 consejos saludables"]}\nIncluye las 5 comidas. Español. Tono sobrio y elegante.`;
+    try {
+      const txt = await window.claude.complete({ messages: [{ role: 'user', content: prompt }], max_tokens: 3000 });
+      const data = this._parseJSON(txt);
+      this.setState({ dieta: data, loadingDieta: false });
+    } catch (err) {
+      this.setState({ dieta: this._fallbackDieta(), loadingDieta: false, errDieta: true });
+    }
+  }
+
+  _fallbackRutina() {
+    return {
+      resumen: 'Rutina equilibrada para construir fuerza y control corporal con progresión gradual.',
+      diasPorSemana: 4, duracionEstimada: '50 min', intensidad: 'Media-alta',
+      advertencias: this.state.form.tieneLesion ? ['Evita rangos de dolor en la zona lesionada; prioriza técnica sobre carga.'] : [],
+      recomendaciones: ['Calienta 8-10 min antes de cada sesión.', 'Descansa al menos 48 h por grupo muscular.', 'Hidrátate durante el entrenamiento.'],
+      dias: [
+        { nombre: 'Día 1', enfoque: 'Pecho y tríceps', duracion: '50 min', ejercicios: [
+          { nombre: 'Press de banca con mancuernas', series: 4, reps: '8-10', descanso: '90 s', nota: '' },
+          { nombre: 'Press inclinado', series: 3, reps: '10-12', descanso: '75 s', nota: '' },
+          { nombre: 'Aperturas', series: 3, reps: '12-15', descanso: '60 s', nota: '' },
+          { nombre: 'Fondos en banco', series: 3, reps: '10-12', descanso: '60 s', nota: '' } ] },
+        { nombre: 'Día 2', enfoque: 'Espalda y bíceps', duracion: '50 min', ejercicios: [
+          { nombre: 'Remo con barra', series: 4, reps: '8-10', descanso: '90 s', nota: '' },
+          { nombre: 'Jalón al pecho', series: 3, reps: '10-12', descanso: '75 s', nota: '' },
+          { nombre: 'Curl de bíceps', series: 3, reps: '12', descanso: '60 s', nota: '' } ] },
+        { nombre: 'Día 3', enfoque: 'Pierna y core', duracion: '55 min', ejercicios: [
+          { nombre: 'Sentadilla', series: 4, reps: '8-10', descanso: '120 s', nota: 'Técnica primero' },
+          { nombre: 'Peso muerto rumano', series: 3, reps: '10', descanso: '90 s', nota: '' },
+          { nombre: 'Plancha', series: 3, reps: '45 s', descanso: '45 s', nota: '' } ] },
+        { nombre: 'Día 4', enfoque: 'Hombro y full body', duracion: '45 min', ejercicios: [
+          { nombre: 'Press militar', series: 4, reps: '8-10', descanso: '90 s', nota: '' },
+          { nombre: 'Elevaciones laterales', series: 3, reps: '12-15', descanso: '60 s', nota: '' },
+          { nombre: 'Burpees', series: 3, reps: '12', descanso: '60 s', nota: '' } ] }
+      ]
+    };
+  }
+  _fallbackDieta() {
+    return {
+      resumen: 'Alimentación balanceada que sostiene tu energía y favorece tu objetivo.',
+      calorias: '~2200 kcal', agua: '3 L',
+      comidas: [
+        { momento: 'Desayuno', opciones: ['3 huevos + avena (40 g) + fruta', 'Yogur griego + granola + arándanos'], nota: '' },
+        { momento: 'Media mañana', opciones: ['Puñado de almendras + manzana', 'Batido de proteína'], nota: '' },
+        { momento: 'Almuerzo', opciones: ['Pechuga de pollo + arroz + ensalada', 'Salmón + quinoa + vegetales'], nota: '' },
+        { momento: 'Merienda', opciones: ['Requesón + nueces', 'Tostada integral + aguacate'], nota: '' },
+        { momento: 'Cena', opciones: ['Carne magra + vegetales al vapor', 'Tortilla de claras + ensalada'], nota: '' }
+      ],
+      recomendaciones: ['Prioriza proteína en cada comida.', 'Elige carbohidratos integrales.', 'Modera azúcares y ultraprocesados.'],
+      consejos: ['Bebe agua antes de cada comida.', 'Come despacio y sin pantallas.', 'Duerme 7-8 h para recuperar.']
+    };
+  }
+
+  // ---------- progress ----------
+  addPeso = () => {
+    const v = parseFloat(this.state.nuevoPeso);
+    if (!v) return;
+    const d = new Date();
+    const fecha = d.getDate().toString().padStart(2,'0') + ' ' + ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'][d.getMonth()];
+    this.setState(s => ({ pesoLog: [...s.pesoLog, { fecha, peso: v }], nuevoPeso: '', form: { ...s.form, peso: String(v) } }));
+  };
+  onNuevoPeso = (e) => this.setState({ nuevoPeso: e.currentTarget.value });
+  onMedida = (e) => { const k = e.currentTarget.dataset.key; const v = e.currentTarget.value; this.setState(s => ({ medidas: { ...s.medidas, [k]: v } })); };
+
+  // ---------- computed ----------
+  _imc() {
+    const p = parseFloat(this.state.form.peso); const h = parseFloat(this.state.form.altura) / 100;
+    if (!p || !h) return null;
+    return (p / (h * h)).toFixed(1);
+  }
+
+  renderVals() {
+    const s = this.state; const f = s.form;
+    const idx = s.bannerIndex % this.quotes.length;
+    const primerNombre = (f.nombre || 'Atleta').split(' ')[0];
+    const imc = this._imc();
+
+    // weight chart geometry
+    const pesos = s.pesoLog.map(p => p.peso);
+    const minP = Math.min(...pesos) - 1, maxP = Math.max(...pesos) + 1;
+    const W = 560, H = 180, pad = 10;
+    const pts = s.pesoLog.map((p, i) => {
+      const x = pad + (i * (W - pad * 2)) / Math.max(1, s.pesoLog.length - 1);
+      const y = pad + (H - pad * 2) * (1 - (p.peso - minP) / (maxP - minP));
+      return { x, y, ...p };
+    });
+    const linePath = pts.map((p, i) => (i === 0 ? 'M' : 'L') + p.x.toFixed(1) + ' ' + p.y.toFixed(1)).join(' ');
+    const areaPath = linePath + ` L${(W-pad).toFixed(1)} ${H-pad} L${pad} ${H-pad} Z`;
+    const deltaPeso = (pesos[pesos.length - 1] - pesos[0]).toFixed(1);
+
+    const objetivos = ['Bajar de peso','Ganar masa muscular','Tonificar','Mantenerse','Mejorar resistencia'];
+    const lesionesLista = ['Rodilla','Espalda','Hombro','Tobillo','Codo','Muñeca','Cuello','Cadera','Otra'];
+
+    const step0Ok = f.nombre && f.edad && f.sexo && f.peso && f.altura;
+    const step1Ok = !!f.objetivo;
+    const step2Ok = f.tieneLesion !== null && (!f.tieneLesion || f.lesiones.length > 0);
+
+    // enrich rutina days with stable ids + resolve open exercise
+    const diasEnriched = s.rutina ? s.rutina.dias.map((d, di) => Object.assign({}, d, {
+      di, ejercicios: (d.ejercicios || []).map((e, ei) => Object.assign({}, e, { id: di + '-' + ei }))
+    })) : [];
+    let ejActual = null;
+    if (s.openEj != null && s.rutina) {
+      const parts = s.openEj.split('-'); const d = s.rutina.dias[+parts[0]];
+      if (d && d.ejercicios[+parts[1]]) ejActual = Object.assign({}, d.ejercicios[+parts[1]], { diaNombre: d.nombre, enfoque: d.enfoque });
+    }
+
+    return {
+      isLanding: s.screen === 'landing',
+      isAuth: s.screen === 'auth',
+      isOnboard: s.screen === 'onboarding',
+      isApp: s.screen === 'app',
+      isAdmin: s.screen === 'admin',
+
+      // banner
+      currentQuote: this.quotes[idx],
+      bannerIndex: idx,
+      bannerDots: this.quotes.map((q, i) => ({ i, bg: i === idx ? '#C6A15B' : 'rgba(198,161,91,0.28)' })),
+
+      // handlers
+      goLogin: this.goLogin, goRegister: this.goRegister, goLanding: this.goLanding,
+      setBanner: this.setBanner, setTab: this.setTab, goAdmin: this.goAdmin,
+      exitAdmin: this.exitAdmin, logout: this.logout,
+      setAuthMode: this.setAuthMode, submitAuth: this.submitAuth,
+      onField: this.onField, onChoose: this.onChoose, setLesion: this.setLesion,
+      toggleLesion: this.toggleLesion, nextStep: this.nextStep, prevStep: this.prevStep,
+      finishOnboarding: this.finishOnboarding, regenerar: this.regenerar,
+      addPeso: this.addPeso, onNuevoPeso: this.onNuevoPeso, onMedida: this.onMedida,
+      loginMode: s.authMode === 'login',
+      setLoginTab: () => this.setAuthMode('login'),
+      setRegisterTab: () => this.setAuthMode('register'),
+
+      // auth copy + tab styling
+      authTitle: s.authMode === 'login' ? 'Bienvenido de nuevo' : 'Crea tu cuenta',
+      authSub: s.authMode === 'login' ? 'Retoma tu disciplina donde la dejaste.' : 'Comienza a esculpir tu mejor versión.',
+      authCta: s.authMode === 'login' ? 'Entrar' : 'Crear cuenta',
+      regTabBg: s.authMode === 'register' ? '#C6A15B' : 'transparent',
+      regTabColor: s.authMode === 'register' ? '#0B0B0D' : '#A8A29A',
+      logTabBg: s.authMode === 'login' ? '#C6A15B' : 'transparent',
+      logTabColor: s.authMode === 'login' ? '#0B0B0D' : '#A8A29A',
+
+      // onboarding progress bars
+      stepBar0: s.onboardStep >= 0 ? '#C6A15B' : 'rgba(198,161,91,0.2)',
+      stepBar1: s.onboardStep >= 1 ? '#C6A15B' : 'rgba(198,161,91,0.2)',
+      stepBar2: s.onboardStep >= 2 ? '#C6A15B' : 'rgba(198,161,91,0.2)',
+
+      // sexo buttons
+      sexoHombreBg: f.sexo === 'Hombre' ? 'rgba(198,161,91,0.14)' : '#141416',
+      sexoHombreColor: f.sexo === 'Hombre' ? '#E0C588' : '#A8A29A',
+      sexoHombreBorder: f.sexo === 'Hombre' ? '#C6A15B' : 'rgba(198,161,91,0.22)',
+      sexoMujerBg: f.sexo === 'Mujer' ? 'rgba(198,161,91,0.14)' : '#141416',
+      sexoMujerColor: f.sexo === 'Mujer' ? '#E0C588' : '#A8A29A',
+      sexoMujerBorder: f.sexo === 'Mujer' ? '#C6A15B' : 'rgba(198,161,91,0.22)',
+
+      // objetivo options
+      objetivoOpts: objetivos.map(o => ({
+        value: o,
+        bg: f.objetivo === o ? 'rgba(198,161,91,0.14)' : '#141416',
+        color: f.objetivo === o ? '#F3EEE3' : '#C9C3B8',
+        border: f.objetivo === o ? '#C6A15B' : 'rgba(198,161,91,0.22)',
+        mark: f.objetivo === o ? '✦' : ''
+      })),
+
+      // lesion Si/No buttons
+      lesNoBg: f.tieneLesion === false ? 'rgba(198,161,91,0.14)' : '#141416',
+      lesNoColor: f.tieneLesion === false ? '#E0C588' : '#A8A29A',
+      lesNoBorder: f.tieneLesion === false ? '#C6A15B' : 'rgba(198,161,91,0.22)',
+      lesSiBg: f.tieneLesion === true ? 'rgba(198,161,91,0.14)' : '#141416',
+      lesSiColor: f.tieneLesion === true ? '#E0C588' : '#A8A29A',
+      lesSiBorder: f.tieneLesion === true ? '#C6A15B' : 'rgba(198,161,91,0.22)',
+      lesionOpts: lesionesLista.map(l => ({
+        value: l,
+        bg: f.lesiones.includes(l) ? 'rgba(198,161,91,0.16)' : 'transparent',
+        color: f.lesiones.includes(l) ? '#E0C588' : '#A8A29A',
+        border: f.lesiones.includes(l) ? '#C6A15B' : 'rgba(198,161,91,0.3)'
+      })),
+
+      // step gating
+      step0Disabled: !step0Ok, step1Disabled: !step1Ok, step2Disabled: !step2Ok,
+      next0Bg: step0Ok ? '#C6A15B' : 'rgba(198,161,91,0.3)',
+      next0Cursor: step0Ok ? 'pointer' : 'not-allowed',
+      next1Bg: step1Ok ? '#C6A15B' : 'rgba(198,161,91,0.3)',
+      next1Cursor: step1Ok ? 'pointer' : 'not-allowed',
+      finishBg: step2Ok ? '#C6A15B' : 'rgba(198,161,91,0.3)',
+      finishCursor: step2Ok ? 'pointer' : 'not-allowed',
+
+      // form
+      f, form: f, objetivos, lesionesLista,
+      onboardStep: s.onboardStep,
+      isStep0: s.onboardStep === 0, isStep1: s.onboardStep === 1, isStep2: s.onboardStep === 2,
+      step0Ok, step1Ok, step2Ok,
+      lesionSi: f.tieneLesion === true, lesionNo: f.tieneLesion === false,
+
+      // app
+      tab: s.tab,
+      tabInicio: s.tab === 'inicio', tabRutina: s.tab === 'rutina',
+      tabAlim: s.tab === 'alimentacion', tabProgreso: s.tab === 'progreso', tabPerfil: s.tab === 'perfil',
+      primerNombre, nombreCompleto: f.nombre || 'Atleta',
+      objetivoActual: f.objetivo || 'Mantenerse',
+      imc, pesoActual: f.peso || (pesos[pesos.length-1] || '—'), altura: f.altura || '—',
+
+      // plans
+      rutina: s.rutina, dieta: s.dieta,
+      loadingRutina: s.loadingRutina, loadingDieta: s.loadingDieta,
+      errRutina: s.errRutina, errDieta: s.errDieta,
+      rutinaLista: !!s.rutina, dietaLista: !!s.dieta,
+      diasRutina: diasEnriched,
+      openEjercicio: this.openEjercicio, closeEjercicio: this.closeEjercicio, stop: this.stop,
+      modalOpen: !!ejActual,
+      ejNombre: ejActual ? ejActual.nombre : '', ejDia: ejActual ? ejActual.diaNombre : '', ejEnfoque: ejActual ? ejActual.enfoque : '',
+      ejPatronLabel: ejActual ? ejActual.patronLabel : '',
+      ejSeries: ejActual ? ejActual.series : '', ejReps: ejActual ? ejActual.reps : '',
+      ejDescanso: ejActual ? ejActual.descanso : '', ejTempo: ejActual ? ejActual.tempo : '',
+      ejRespiracion: ejActual ? ejActual.respiracion : '', ejEquipo: ejActual ? ejActual.equipo : '',
+      muscleMap: ejActual ? this.muscleMapEl(ejActual.musculos, ejActual.musculosSec) : null,
+      athleteFigure: ejActual ? this.athleteFigureEl(ejActual.patron) : null,
+      primaryLabels: ejActual ? ejActual.musculos.map(k => ({ label: this.muscleLabels[k] || k })) : [],
+      secLabels: ejActual ? ejActual.musculosSec.map(k => ({ label: this.muscleLabels[k] || k })) : [],
+      tecnicaList: ejActual ? ejActual.tecnica.map((t, i) => ({ n: i + 1, t })) : [],
+      erroresList: ejActual ? ejActual.errores.map(t => ({ t })) : [],
+      comidas: s.dieta ? s.dieta.comidas : [],
+      proximoDia: s.rutina && s.rutina.dias && s.rutina.dias[0] ? s.rutina.dias[0] : null,
+      tieneAdvertencias: s.rutina && s.rutina.advertencias && s.rutina.advertencias.length > 0,
+
+      // progress
+      pesoLog: s.pesoLog, linePath, areaPath, chartPts: pts, chartW: W, chartH: H,
+      deltaPeso, deltaAbs: Math.abs(deltaPeso),
+      bajando: parseFloat(deltaPeso) <= 0,
+      nuevoPeso: s.nuevoPeso, medidas: s.medidas,
+
+      // app misc
+      inicial: (f.nombre || 'A').trim().charAt(0).toUpperCase() || 'A',
+      hoyFecha: (() => { const d = new Date(); return d.getDate() + ' ' + ['ENERO','FEBRERO','MARZO','ABRIL','MAYO','JUNIO','JULIO','AGOSTO','SEPTIEMBRE','OCTUBRE','NOVIEMBRE','DICIEMBRE'][d.getMonth()]; })(),
+      imcTxt: imc || '—',
+      perfilEmail: f.email || 'atleta@cuerpogriego.app',
+      proximoEnfoque: s.rutina && s.rutina.dias && s.rutina.dias[0] ? s.rutina.dias[0].enfoque : '',
+      proximoDuracion: s.rutina && s.rutina.dias && s.rutina.dias[0] ? s.rutina.dias[0].duracion : '',
+      proximoNombre: s.rutina && s.rutina.dias && s.rutina.dias[0] ? s.rutina.dias[0].nombre : '',
+
+      // progress display
+      pesoUltimo: pesos[pesos.length - 1],
+      deltaTxt: (parseFloat(deltaPeso) > 0 ? '+' : '') + deltaPeso,
+      deltaColor: parseFloat(deltaPeso) <= 0 ? '#7FB069' : '#D2784F',
+
+      // bottom nav colors
+      navInicioColor: s.tab === 'inicio' ? '#C6A15B' : '#6B665E',
+      navRutinaColor: s.tab === 'rutina' ? '#C6A15B' : '#6B665E',
+      navAlimColor: s.tab === 'alimentacion' ? '#C6A15B' : '#6B665E',
+      navProgresoColor: s.tab === 'progreso' ? '#C6A15B' : '#6B665E',
+      navPerfilColor: s.tab === 'perfil' ? '#C6A15B' : '#6B665E',
+
+      // admin sample data
+      adminStats: [
+        { label: 'Usuarios totales', value: '1.284', delta: '▲ 8,2% este mes' },
+        { label: 'Activos hoy', value: '347', delta: '▲ 3,1%' },
+        { label: 'Planes generados', value: '5.912', delta: '▲ 12,4%' },
+        { label: 'Retención 30d', value: '68%', delta: '▲ 2,0%' }
+      ],
+      adminUsers: [
+        { inicial: 'M', nombre: 'Mateo Rojas', email: 'mateo@correo.com', objetivo: 'Ganar masa muscular', estado: 'Activo', planes: 6, estadoBg: 'rgba(127,176,105,0.15)', estadoColor: '#8FBF75' },
+        { inicial: 'L', nombre: 'Lucía Fernández', email: 'lucia@correo.com', objetivo: 'Bajar de peso', estado: 'Activo', planes: 4, estadoBg: 'rgba(127,176,105,0.15)', estadoColor: '#8FBF75' },
+        { inicial: 'D', nombre: 'Diego Herrera', email: 'diego@correo.com', objetivo: 'Tonificar', estado: 'Activo', planes: 9, estadoBg: 'rgba(127,176,105,0.15)', estadoColor: '#8FBF75' },
+        { inicial: 'S', nombre: 'Sofía Castro', email: 'sofia@correo.com', objetivo: 'Mejorar resistencia', estado: 'Suspendido', planes: 2, estadoBg: 'rgba(210,120,80,0.15)', estadoColor: '#D2784F' },
+        { inicial: 'A', nombre: 'Andrés Vega', email: 'andres@correo.com', objetivo: 'Mantenerse', estado: 'Activo', planes: 5, estadoBg: 'rgba(127,176,105,0.15)', estadoColor: '#8FBF75' },
+        { inicial: 'V', nombre: 'Valentina Ruiz', email: 'valentina@correo.com', objetivo: 'Ganar masa muscular', estado: 'Activo', planes: 7, estadoBg: 'rgba(127,176,105,0.15)', estadoColor: '#8FBF75' }
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>
