@@ -1,12 +1,12 @@
 import type { CSSProperties } from "react";
 
-const G = "#16161C";
-const GS = "#33333C";
+const G = "#1a1526";
+const GS = "#383046";
 
 function bodyColor(key: string, primary: Set<string>, secondary: Set<string>): string {
-  if (primary.has(key)) return "#E8CE8C";
-  if (secondary.has(key)) return "rgba(198,161,91,0.5)";
-  return "#26262E";
+  if (primary.has(key)) return "#ff6ec4";
+  if (secondary.has(key)) return "rgba(255,63,180,0.5)";
+  return "#282236";
 }
 
 function Muscle({
@@ -27,7 +27,7 @@ function Muscle({
     ? { animation: "cgMusclePulse 1.6s ease-in-out infinite" }
     : {};
   const Tag = tag as "rect";
-  return <Tag fill={fill} stroke="#0B0B0D" strokeWidth={0.6} style={style} {...attrs} />;
+  return <Tag fill={fill} stroke="#0d0a14" strokeWidth={0.6} style={style} {...attrs} />;
 }
 
 function Base({ ox }: { ox: number }) {
@@ -103,7 +103,7 @@ function Cap({ x, t }: { x: number; t: string }) {
     <text
       x={x}
       y={228}
-      fill="#6B665E"
+      fill="#675e7f"
       fontSize={9}
       fontFamily="Jost, sans-serif"
       letterSpacing={1.5}

@@ -12,7 +12,7 @@ export function AppHeader({ name }: { name: string }) {
       </div>
       <div className="flex items-center gap-2.5">
         <div className="text-[13px] text-muted-2">{primerNombre}</div>
-        <div className="w-[34px] h-[34px] rounded-full bg-gradient-to-br from-gold to-[#7A5F28] flex items-center justify-center text-ink font-display font-bold text-sm">
+        <div className="w-[34px] h-[34px] rounded-full bg-gradient-to-br from-gold to-[#7a1e5c] flex items-center justify-center text-ink font-display font-bold text-sm">
           {inicial}
         </div>
       </div>

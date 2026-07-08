@@ -11,7 +11,7 @@ export default async function LoginPage({
 
   return (
     <div className="min-h-screen grid md:grid-cols-2">
-      <div className="relative bg-gradient-to-b from-[#101013] to-[#16120A] flex flex-col justify-between p-8 md:p-14 border-b md:border-b-0 md:border-r border-gold/18 min-h-[220px]">
+      <div className="relative bg-gradient-to-b from-[#120d1c] to-[#1a1028] flex flex-col justify-between p-8 md:p-14 border-b md:border-b-0 md:border-r border-gold/18 min-h-[220px]">
         <Link href="/" className="flex items-center gap-3">
           <div className="w-8 h-8 border-[1.5px] border-gold flex items-center justify-center text-gold font-display font-extrabold text-base">
             Y

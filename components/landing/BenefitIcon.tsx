@@ -10,7 +10,7 @@ const ICONS: Record<string, string> = {
 export function BenefitIcon({ name }: { name: keyof typeof ICONS }) {
   if (name === "disponible") {
     return (
-      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#C6A15B" strokeWidth="1.4">
+      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#3ee6ff" strokeWidth="1.4">
         <circle cx="12" cy="12" r="9" />
         <path d={ICONS.disponible} />
       </svg>
@@ -18,7 +18,7 @@ export function BenefitIcon({ name }: { name: keyof typeof ICONS }) {
   }
   if (name === "app") {
     return (
-      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#C6A15B" strokeWidth="1.4">
+      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#3ee6ff" strokeWidth="1.4">
         <rect x="7" y="2.5" width="10" height="19" rx="2" />
         <path d={ICONS.app} />
       </svg>
@@ -26,14 +26,14 @@ export function BenefitIcon({ name }: { name: keyof typeof ICONS }) {
   }
   if (name === "rutinas") {
     return (
-      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#C6A15B" strokeWidth="1.4">
+      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#3ee6ff" strokeWidth="1.4">
         <path d={ICONS.rutinas} />
         <circle cx="12" cy="12" r="2.2" />
       </svg>
     );
   }
   return (
-    <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#C6A15B" strokeWidth="1.4">
+    <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#3ee6ff" strokeWidth="1.4">
       <path d={ICONS[name]} />
     </svg>
   );

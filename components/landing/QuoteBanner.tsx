@@ -14,9 +14,9 @@ export function QuoteBanner() {
   }, []);
 
   return (
-    <div className="relative overflow-hidden py-[clamp(40px,7vh,74px)] px-6 bg-gradient-to-b from-[#101013] to-[#17130C] border-y border-gold/18 text-center">
+    <div className="relative overflow-hidden py-[clamp(40px,7vh,74px)] px-6 bg-gradient-to-b from-[#120d1c] to-[#1c1030] border-y border-gold/18 text-center">
       <div className="max-w-[900px] mx-auto min-h-24 flex flex-col justify-center">
-        <div className="text-gold font-display text-[28px] mb-2.5">❝</div>
+        <div className="text-gold font-display text-[28px] mb-2.5 neon-text-pink">❝</div>
         <p
           key={index}
           className="font-quote italic font-medium text-[clamp(24px,3.6vw,40px)] leading-tight text-cream m-0 animate-[cgFade_0.7s_ease]"
@@ -31,7 +31,7 @@ export function QuoteBanner() {
             aria-label={`Frase ${i + 1}`}
             onClick={() => setIndex(i)}
             className="w-6.5 h-[3px] border-none cursor-pointer p-0 transition-colors"
-            style={{ background: i === index ? "#C6A15B" : "rgba(198,161,91,0.28)" }}
+            style={{ background: i === index ? "#ff3fb4" : "rgba(255,63,180,0.28)" }}
           />
         ))}
       </div>

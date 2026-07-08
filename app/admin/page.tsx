@@ -35,7 +35,7 @@ export default async function AdminUsersPage() {
               style={{ gridTemplateColumns: "2fr 1.3fr 1fr 1fr 1.2fr" }}
             >
               <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-gold to-[#7A5F28] flex items-center justify-center text-ink font-display font-bold text-xs">
+                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-gold to-[#7a1e5c] flex items-center justify-center text-ink font-display font-bold text-xs">
                   {inicial}
                 </div>
                 <div>

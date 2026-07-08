@@ -45,7 +45,7 @@ export default async function InicioPage() {
         </div>
       </div>
 
-      <div className="relative bg-gradient-to-br from-[#16120A] to-card border border-gold/28 p-6.5 mb-5 overflow-hidden">
+      <div className="relative bg-gradient-to-br from-[#1a1028] to-card border border-gold/28 p-6.5 mb-5 overflow-hidden">
         <div className="absolute -top-5 -right-2.5 font-display text-[130px] text-gold/[0.06] leading-none">
           π
         </div>
@@ -79,7 +79,7 @@ export default async function InicioPage() {
           href="/app/rutina"
           className="text-left bg-card border border-gold/16 hover:border-gold/45 transition-colors p-5.5 block"
         >
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C6A15B" strokeWidth="1.4">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#3ee6ff" strokeWidth="1.4">
             <path d="M12 3v18M7 6l-4 6 4 6M17 6l4 6-4 6" />
           </svg>
           <div className="font-display text-base mt-3 text-cream">Mi rutina</div>
@@ -89,7 +89,7 @@ export default async function InicioPage() {
           href="/app/alimentacion"
           className="text-left bg-card border border-gold/16 hover:border-gold/45 transition-colors p-5.5 block"
         >
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C6A15B" strokeWidth="1.4">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#3ee6ff" strokeWidth="1.4">
             <path d="M6 3v7a3 3 0 006 0V3M9 10v11M15 3c-1.5 1-2 3-2 5s.5 4 2 5v8" />
           </svg>
           <div className="font-display text-base mt-3 text-cream">Mi alimentación</div>

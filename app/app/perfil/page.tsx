@@ -17,7 +17,7 @@ export default async function PerfilPage() {
       <h1 className="font-display font-bold text-[clamp(26px,5vw,38px)] mt-2 mb-5.5">Perfil</h1>
 
       <div className="flex items-center gap-4 bg-card border border-gold/16 p-5 mb-4.5">
-        <div className="w-14 h-14 rounded-full bg-gradient-to-br from-gold to-[#7A5F28] flex items-center justify-center text-ink font-display font-bold text-2xl">
+        <div className="w-14 h-14 rounded-full bg-gradient-to-br from-gold to-[#7a1e5c] flex items-center justify-center text-ink font-display font-bold text-2xl">
           {inicial}
         </div>
         <div>

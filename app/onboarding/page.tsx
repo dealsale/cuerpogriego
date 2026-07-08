@@ -76,7 +76,7 @@ export default function OnboardingPage() {
   return (
     <div
       className="min-h-screen flex flex-col items-center px-5 pt-[clamp(24px,4vw,48px)] pb-[60px]"
-      style={{ background: "radial-gradient(circle at 50% -10%, #16120A, #0B0B0D 55%)" }}
+      style={{ background: "radial-gradient(circle at 50% -10%, #1a1028, #0d0a14 55%)" }}
     >
       <Link href="/" className="flex items-center gap-3 mb-[34px]">
         <div className="w-8 h-8 border-[1.5px] border-gold flex items-center justify-center text-gold font-display font-extrabold text-base">

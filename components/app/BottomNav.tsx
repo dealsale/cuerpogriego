@@ -39,7 +39,7 @@ export function BottomNav() {
       <div className="grid grid-cols-5 w-full max-w-[880px]">
         {TABS.map((t) => {
           const active = pathname.startsWith(`/app/${t.tab}`);
-          const color = active ? "#C6A15B" : "#6B665E";
+          const color = active ? "#ff3fb4" : "#675e7f";
           return (
             <button
               key={t.tab}

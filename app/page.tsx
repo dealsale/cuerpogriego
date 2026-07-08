@@ -101,7 +101,7 @@ export default function Home() {
           <h1 className="font-display font-extrabold text-[clamp(42px,6.2vw,82px)] leading-[0.98] m-0 text-cream tracking-tight">
             Esculpe tu
             <br />
-            <span className="text-gold">mejor versión.</span>
+            <span className="text-gradient-neon">mejor versión.</span>
           </h1>
           <p className="font-quote text-[clamp(19px,2.4vw,26px)] leading-[1.5] text-muted-1 mt-6.5 max-w-[520px]">
             Rutinas y planes de alimentación creados por inteligencia artificial, únicos según tu
@@ -200,7 +200,7 @@ export default function Home() {
       </div>
 
       {/* CTA */}
-      <div className="text-center py-[clamp(56px,10vh,120px)] px-6 bg-gradient-to-b from-ink to-[#14100A] border-t border-gold/18">
+      <div className="text-center py-[clamp(56px,10vh,120px)] px-6 bg-gradient-to-b from-ink to-[#170d24] border-t border-gold/18">
         <h2 className="font-display font-extrabold text-[clamp(30px,5vw,58px)] mx-auto text-cream max-w-[720px] leading-[1.05]">
           El mármol no se esculpe solo.
         </h2>

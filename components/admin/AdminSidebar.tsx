@@ -15,7 +15,7 @@ export function AdminSidebar() {
   const pathname = usePathname();
 
   return (
-    <div className="bg-[#101012] border-r border-gold/16 p-6 flex flex-col">
+    <div className="bg-[#120d1a] border-r border-gold/16 p-6 flex flex-col">
       <div className="flex items-center gap-2.5 mb-8.5">
         <div className="w-[30px] h-[30px] border-[1.5px] border-gold flex items-center justify-center text-gold font-display font-extrabold text-[15px]">
           Y

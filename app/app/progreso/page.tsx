@@ -54,14 +54,14 @@ export default async function ProgresoPage() {
         <svg viewBox={`0 0 ${chart.W} ${chart.H}`} className="w-full h-auto overflow-visible">
           <defs>
             <linearGradient id="cgArea" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="rgba(198,161,91,0.32)" />
-              <stop offset="100%" stopColor="rgba(198,161,91,0)" />
+              <stop offset="0%" stopColor="rgba(62,230,255,0.32)" />
+              <stop offset="100%" stopColor="rgba(62,230,255,0)" />
             </linearGradient>
           </defs>
           <path d={chart.areaPath} fill="url(#cgArea)" />
-          <path d={chart.linePath} fill="none" stroke="#C6A15B" strokeWidth={2.5} />
+          <path d={chart.linePath} fill="none" stroke="#3ee6ff" strokeWidth={2.5} />
           {chart.pts.map((p, i) => (
-            <circle key={i} cx={p.x} cy={p.y} r={4} fill="#0B0B0D" stroke="#C6A15B" strokeWidth={2} />
+            <circle key={i} cx={p.x} cy={p.y} r={4} fill="#0d0a14" stroke="#3ee6ff" strokeWidth={2} />
           ))}
         </svg>
         <div className="flex justify-between mt-2">

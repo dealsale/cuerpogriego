@@ -26,9 +26,9 @@ export function ExerciseModal({ exercise, catalog }: Props) {
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="w-full max-w-[760px] bg-[#101013] border border-gold/30 animate-[cgModalIn_0.35s_ease_both] my-auto"
+        className="w-full max-w-[760px] bg-[#120d1c] border border-gold/30 animate-[cgModalIn_0.35s_ease_both] my-auto"
       >
-        <div className="flex items-start justify-between gap-4 px-6 py-5 border-b border-gold/16 sticky top-0 bg-[#101013] z-[2]">
+        <div className="flex items-start justify-between gap-4 px-6 py-5 border-b border-gold/16 sticky top-0 bg-[#120d1c] z-[2]">
           <div>
             <div className="font-display tracking-[0.16em] text-[10.5px] text-gold uppercase">
               {exercise.diaNombre} · {exercise.enfoque}
@@ -82,7 +82,7 @@ export function ExerciseModal({ exercise, catalog }: Props) {
               <div className="flex flex-wrap gap-2.5 justify-center mt-2.5">
                 {exercise.musculos.map((k) => (
                   <span key={k} className="inline-flex items-center gap-1.5 text-xs text-gold-light">
-                    <span className="w-2 h-2 bg-[#E8CE8C] rounded-full" />
+                    <span className="w-2 h-2 bg-[#ff6ec4] rounded-full" />
                     {MUSCLE_LABELS[k] || k}
                   </span>
                 ))}
