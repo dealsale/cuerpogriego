@@ -1,6 +1,8 @@
+import Image from "next/image";
 import { QuoteBanner } from "@/components/landing/QuoteBanner";
 import { BenefitIcon } from "@/components/landing/BenefitIcon";
 import { GoldButton } from "@/components/ui/GoldButton";
+import { BrandLogo } from "@/components/ui/BrandLogo";
 
 const BENEFICIOS = [
   {
@@ -58,14 +60,10 @@ export default function Home() {
     <div className="min-h-screen">
       {/* NAV */}
       <div className="sticky top-0 z-40 flex items-center justify-between px-[clamp(20px,5vw,64px)] py-[18px] bg-ink/[0.82] backdrop-blur-md border-b border-gold/18">
-        <div className="flex items-center gap-3">
-          <div className="w-[34px] h-[34px] border-[1.5px] border-gold flex items-center justify-center text-gold font-display font-extrabold text-[17px]">
-            Y
-          </div>
-          <div className="font-display font-bold tracking-[0.28em] text-[15px] text-cream">
-            CVERPO GRIEGO
-          </div>
-        </div>
+        <BrandLogo
+          size={38}
+          wordmarkClassName="font-display font-bold tracking-[0.28em] text-[15px] text-cream"
+        />
         <div className="flex items-center gap-[clamp(14px,3vw,34px)]">
           <a href="#beneficios" className="text-[13.5px] tracking-[0.08em] text-muted-2 hidden sm:inline">
             Beneficios
@@ -135,9 +133,14 @@ export default function Home() {
         </div>
         <div className="relative animate-[cgFade_1.2s_ease_both]">
           <div className="absolute -inset-3.5 border border-gold/30 pointer-events-none z-[2]" />
-          <div className="w-full aspect-[4/5] bg-card flex items-center justify-center text-muted-4 text-sm border border-gold/10">
-            Escultura griega
-          </div>
+          <Image
+            src="/logo.jpg"
+            alt="Gym Cuerpo Griego — logo"
+            width={1063}
+            height={1083}
+            className="w-full h-auto border border-gold/10 neon-glow-pink"
+            priority
+          />
         </div>
       </div>
 
@@ -214,9 +217,10 @@ export default function Home() {
 
       {/* FOOTER */}
       <div className="px-[clamp(20px,5vw,64px)] py-10 border-t border-gold/14 flex flex-wrap items-center justify-between gap-4">
-        <div className="font-display font-bold tracking-[0.28em] text-[13px] text-muted-2">
-          CVERPO GRIEGO
-        </div>
+        <BrandLogo
+          size={30}
+          wordmarkClassName="font-display font-bold tracking-[0.28em] text-[13px] text-muted-2"
+        />
         <div className="text-[12.5px] text-muted-4 tracking-[0.06em]">
           © 2026 Cuerpo Griego · Impulsado por IA (DeepSeek)
         </div>

@@ -7,6 +7,7 @@ import { Field, TextInput, TextArea } from "@/components/ui/Field";
 import { ChoiceButton } from "@/components/ui/ChoiceButton";
 import { GoldButton } from "@/components/ui/GoldButton";
 import { OBJETIVOS, LESIONES, DIAS_OPTIONS } from "@/lib/options";
+import { BrandLogo } from "@/components/ui/BrandLogo";
 
 interface FormState {
   nombre: string;
@@ -78,11 +79,11 @@ export default function OnboardingPage() {
       className="min-h-screen flex flex-col items-center px-5 pt-[clamp(24px,4vw,48px)] pb-[60px]"
       style={{ background: "radial-gradient(circle at 50% -10%, #1a1028, #0d0a14 55%)" }}
     >
-      <Link href="/" className="flex items-center gap-3 mb-[34px]">
-        <div className="w-8 h-8 border-[1.5px] border-gold flex items-center justify-center text-gold font-display font-extrabold text-base">
-          Y
-        </div>
-        <div className="font-display font-bold tracking-[0.26em] text-sm">CVERPO GRIEGO</div>
+      <Link href="/" className="mb-[34px]">
+        <BrandLogo
+          size={34}
+          wordmarkClassName="font-display font-bold tracking-[0.26em] text-sm text-cream"
+        />
       </Link>
 
       <div className="w-full max-w-[560px] flex items-center gap-2.5 mb-10">

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { BrandLogo } from "@/components/ui/BrandLogo";
 
 const NAV_ITEMS = [
   { href: "/admin", label: "Usuarios" },
@@ -16,11 +17,14 @@ export function AdminSidebar() {
 
   return (
     <div className="bg-[#120d1a] border-r border-gold/16 p-6 flex flex-col">
-      <div className="flex items-center gap-2.5 mb-8.5">
-        <div className="w-[30px] h-[30px] border-[1.5px] border-gold flex items-center justify-center text-gold font-display font-extrabold text-[15px]">
-          Y
+      <div className="mb-8.5">
+        <BrandLogo
+          size={30}
+          wordmarkClassName="font-display font-bold tracking-[0.18em] text-xs text-cream"
+        />
+        <div className="font-display tracking-[0.3em] text-[10px] text-gold mt-2 ml-[42px]">
+          ADMIN
         </div>
-        <div className="font-display font-bold tracking-[0.18em] text-xs">ADMIN</div>
       </div>
       <div className="flex flex-col gap-1">
         {NAV_ITEMS.map((item) => {
